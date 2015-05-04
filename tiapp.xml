@@ -35,6 +35,11 @@
                 <false/>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleDefault</string>
+                <key>NSLocationAlwaysUsageDescription</key>
+                <string>
+                    We need to use the GPS for this to work
+                </string>
+
             </dict>
         </plist>
     </ios>
@@ -47,7 +52,10 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules/>
+    <modules>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+    </modules>
     <deployment-targets>
         <target device="android">true</target>
         <target device="ipad">true</target>

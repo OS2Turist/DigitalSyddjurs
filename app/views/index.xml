@@ -1,5 +1,16 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label" onClick="doClick">Hello, World</Label>
-	</Window>
+	<TabGroup>
+		<Tab title="L('hometab')">
+			<Require id="homewin" src="home" />
+		</Tab>			
+		<Tab title="L('profiletab')">
+			<Require id="profilewin" src="profile" />
+		</Tab>			
+		<Tab title="L('listtab')">
+			<Require id="listwin" src="list" />
+		</Tab>			
+		<Tab title="L('maptab')">
+			<Require id="mapwin" src="map" />
+		</Tab>			
+	</TabGroup>
 </Alloy>

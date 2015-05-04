@@ -1,0 +1,8 @@
+<Alloy>
+	<Window id="detailwin">
+		<View class="topcontainer">
+			
+			<Label>Viser detaljer om events og attraktioner. Evt. animeret åbning?</Label>
+		</View>
+	</Window>
+</Alloy>

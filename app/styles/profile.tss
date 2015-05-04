@@ -1,0 +1,13 @@
+"#btnFavorites": {
+	top: "20%",
+	left: "40%"	
+},
+"#btnHistory": {
+	bottom: "10%",
+	left: "10%"
+},
+"#btnSettings": {
+	bottom: "30%",
+	right: "10%"
+}
+

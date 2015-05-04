@@ -1,0 +1,4 @@
+<Alloy>
+	<Window onFocus="doFocus" id="mapwin" title="L('maptitle')">
+	</Window>
+</Alloy>

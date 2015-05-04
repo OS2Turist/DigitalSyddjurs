@@ -1,0 +1,9 @@
+<Alloy>
+	<Window title="L('profiletitle')">
+		<View width="Ti.UI.FILL" height="Ti.UI.FILL">
+			<Button id="btnFavorites" onClick="doClickFavorites" title="L('favorites_button')" />
+			<Button id="btnHistory" onClick="doClickHistory" title="L('history_button')" />
+			<Button id="btnSettings" onClick="doClickSettings" title="L('settings_button')" />
+		</View>
+	</Window>
+</Alloy>

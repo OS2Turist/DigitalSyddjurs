@@ -1,0 +1,25 @@
+<Alloy>
+	<Window title="L('listtitle')">
+		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
+			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
+				<Templates>
+					<ItemTemplate name="template">
+						<View layout="horizontal" height="Ti.UI.SIZE" width="Ti.UI.FILL">
+							<View layout="vertical" height="Ti.UI.SIZE" height="68dp" bindId="rowView">
+								<Label class="itemlabel" bindId="title" id="title" />
+								<Label class="itemdistance" bindId="distance" id="distance"/>
+							</View>
+							<!--<ImageView class="itemimage" width="50" height="50" bindId="arrimage" id="arrimage" />-->
+						</View>
+					</ItemTemplate>
+				</Templates>
+				<ListSection />
+				<PullView>
+					<View>
+						<Label>Hjælpe tekst her, eller 'release to update'?</Label>
+					</View>
+				</PullView>
+			</ListView>		
+		</ScrollView>
+	</Window>
+</Alloy>

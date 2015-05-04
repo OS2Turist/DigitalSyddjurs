@@ -1,0 +1,10 @@
+<Alloy>
+	<NavigationWindow id="navwin">
+		<Window onClose="doClose" class="topcontainer" title="L('favorites_title')">
+			<LeftNavButton>
+				<Button onClick="doClickBack" title="L('back_button')"/>
+			</LeftNavButton>
+			<View><Label>Favorites</Label></View>
+		</Window>
+	</NavigationWindow>
+</Alloy>

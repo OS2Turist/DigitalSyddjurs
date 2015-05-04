@@ -1,0 +1,4 @@
+<resources>
+    <string name="appname">Tourist portal</string>
+    <string name="NSLocationAlwaysUsageDescription">To show you relevant events and points of interest, the app needs to know your location.</string>
+</resources>

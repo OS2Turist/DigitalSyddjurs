@@ -1,0 +1,35 @@
+<resources>
+	<!-- Generic strings -->
+	<string name="back_button">Tilbage</string>
+	
+	<!-- Tab group -->
+	<string name="hometab">Oversigt</string>
+	<string name="profiletab">Profil</string>
+	<string name="listtab">Liste</string>
+	<string name="maptab">Kort</string>
+	
+	<!-- Home screen -->
+	<string name="hometitle">TILBUD INDEN FOR</string>
+
+	<!-- Profile screen -->
+	<string name="profiletitle">Profil</string>
+	<string name="favorites_button">Favoritter</string>
+	<string name="history_button">Historik</string>
+	<string name="settings_button">Indstillinger</string>
+	
+	<!-- List screen -->
+	<string name="listtitle">Liste</string>
+	
+	<!-- Map screen -->
+	<string name="maptitle">Kort</string>
+	
+	<!-- Favorites screen -->
+	<string name="favorites_title">Favoritter</string>
+	
+	<!-- Settings screen -->
+	<string name="settings_title">Indstillinger</string>
+
+	<!-- History screen -->
+	<string name="history_title">Historik</string>
+
+</resources>

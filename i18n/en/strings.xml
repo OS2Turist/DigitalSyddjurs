@@ -1,0 +1,35 @@
+<resources>
+	<!-- Generic strings -->
+	<string name="back_button">Back</string>
+	
+	<!-- Tab group -->
+	<string name="hometab">Home</string>
+	<string name="profiletab">Profile</string>
+	<string name="listtab">List</string>
+	<string name="maptab">Map</string>
+	
+	<!-- Home screen -->
+	<string name="hometitle">ATTRACTIONS WITHIN</string>
+
+	<!-- Profile screen -->
+	<string name="profiletitle">Profile</string>
+	<string name="favorites_button">Favorites</string>
+	<string name="history_button">History</string>
+	<string name="settings_button">Settings</string>
+	
+	<!-- List screen -->
+	<string name="listtitle">List</string>
+	
+	<!-- Map screen -->
+	<string name="maptitle">Map</string>
+	
+	<!-- Favorites screen -->
+	<string name="favorites_title">Favorites</string>
+	
+	<!-- Settings screen -->
+	<string name="settings_title">Settings</string>
+
+	<!-- History screen -->
+	<string name="history_title">History</string>
+
+</resources>

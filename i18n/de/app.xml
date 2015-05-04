@@ -1,0 +1,4 @@
+<resources>
+    <string name="appname">Tourismus-Portal</string>
+    <string name="NSLocationAlwaysUsageDescription">Um Ihnen zu zeigen relevante Veranstaltungen und Sehenswürdigkeiten in der Nähe, muss die App Ihren Standort kennen.</string>
+</resources>

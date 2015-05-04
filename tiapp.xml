@@ -35,11 +35,6 @@
                 <false/>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleDefault</string>
-                <key>NSLocationAlwaysUsageDescription</key>
-                <string>
-                    We need to use the GPS for this to work
-                </string>
-
             </dict>
         </plist>
     </ios>

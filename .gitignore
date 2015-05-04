@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .DS_Store
 Resources
 build.log
@@ -8,3 +9,8 @@ tmp
 .project
 .settings
 Thumbs.db
+=======
+# Build folder and log file
+build/
+build.log
+>>>>>>> a06186452e05c34890be34c1ce3d2de605190688

@@ -66,12 +66,12 @@ if (typeof Ti !== 'undefined') {
         }
     };
 
-    createHTTPClient = function () {
+    var createHTTPClient = function () {
 
         var xhr = new XMLHttpRequest();
         return xhr;
 
-    }
+    };
 }
 
 Drupal.prototype.Settings = Settings;
@@ -477,7 +477,10 @@ Drupal.prototype.getResource = function (resourceName, args, success, failure, h
         httpMethod:'GET'
     }, success, failure, headers);
 };
-
+/**
+ * Calls the service without the .json extension
+ * This extension was added by Claus Stilborg
+ */
 Drupal.prototype.getResourceNoExtention = function (resourceName, args, success, failure, headers) {
     this.makeAuthenticatedRequest({
         servicePath:resourceName + "/" + this.encodeUrlString(args),

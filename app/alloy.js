@@ -10,3 +10,9 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 Alloy.Globals.Map = require('ti.map');
+
+var Tracker = require("Tracker");
+Alloy.Globals.Tracker = new Tracker();
+
+
+

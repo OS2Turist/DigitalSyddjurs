@@ -46,6 +46,12 @@ function loadEventList(){
 }
 
 (function(){
+	
+	Ti.App.addEventListener("Tracker:locationchanged", function(e){
+		
+		Ti.API.info(JSON.stringify(e));
+	});
+	
 	// get current position
 	//Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_NEAREST_TEN_METERS;
 

@@ -4,6 +4,7 @@
 			<Button image="Menu.png" />
 		</RightNavButton>>
 		<View class="topcontainer" height="Ti.UI.FILL">
+			<Button onClick="doTest" top="40">Test globals tracker</Button>
 			<Label>Bobler her (Discovery)</Label>
 			<View top="85%" layout="vertical" left="5%" width="90%">
 				<Label id="lblKmSetting" right="0"/>

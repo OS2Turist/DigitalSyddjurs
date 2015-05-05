@@ -89,6 +89,7 @@ function ServiceListener(serviceuser, serviceroot, serviceendpoint){
 	 *  public instance method for processing and storing the data returened by the service
 	 */
 	this.processJSON = function(json_obj){
+		var listchangedflag = false;
 	    var loc, newevent, image_uri, date_from, date_to, datepart, res;
 	    var arrangementer = Alloy.Collections.instance("Arrangement");
 	    var table = arrangementer.config.adapter.collection_name;
@@ -120,8 +121,11 @@ function ServiceListener(serviceuser, serviceroot, serviceendpoint){
 						if(res_arr.length === 0){
 		    				newevent.save();
 		    				arrangementer.add(newevent);
+		    				listchangedflag = true;
 						}else{
 							// Found, update
+							// TODO compare content and only update changed records and set listchangedflag if needed;
+		    				listchangedflag = true;
 							newevent.set({id: res_arr[0].get("id")});
 							newevent.save();
 						}						
@@ -133,7 +137,13 @@ function ServiceListener(serviceuser, serviceroot, serviceendpoint){
 	    	// grap the timestamp from info and clean up using the nid list
 	    	Ti.App.Properties.setString("latestBackendTimestamp", json_obj.info.timestamp);
 	    	// Now the delete operation to clean up old events
-	    	arrangementer.cleanUpAndSync(json_obj.info.nids);
+	    	if(arrangementer.cleanUpAndSync(json_obj.info.nids)){
+	    		listchangedflag = true;	
+	    	}
+	    }
+	    // Notify the app that the list has changed
+	    if(listchangedflag){
+	    	Ti.App.fireEvent("ServiceListener:listdatachanged");
 	    }
 	};
 	

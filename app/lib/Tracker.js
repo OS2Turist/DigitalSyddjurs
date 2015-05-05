@@ -18,25 +18,27 @@ function Tracker(interval){
 	}
 	
 	Ti.Geolocation.getCurrentPosition(function(position){
-		_currentPosition = position;
+		this._currentPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
 	});
 	
 	/**
 	 * Public instance method that returns the current position
 	 */
 	this.CurrentPosition = function(){
-		return _currentPosition;	
+		return self._currentPosition;	
 	};
 	
 	/**
-	 * Start the timer to update the position
+	 * Start the timer to update the position and fire an App wide event if the position has changed more than the set trigger range
 	 */
 	var timer = setInterval(function(){
-		Ti.API.info("getting the current position of the device");
+		
 		Ti.Geolocation.getCurrentPosition(function(position){
+			// TODO fix this fucking mess
 			// If the current position has moved more than 100 meter from the last one, we need to fire an event
-			if(geolib.getDistance(_currentPosition.coords, position.coords, 10) > _trigger_range){
-				_currentPosition = position;	
+			if(geolib.getDistance(_currentPosition, position.coords, 10) > _trigger_range){
+				_currentPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+				Ti.API.info("getting the current position of the device " + JSON.stringify(_currentPosition));	
 				Ti.App.fireEvent("Tracker:locationchanged", _currentPosition);
 			}
 		});

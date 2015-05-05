@@ -100,12 +100,13 @@ exports.definition = {
 				    db.execute(sql);
 				    db.close();
 				    collection.trigger('sync');
+				    return true;
+				}else{
+					return false;
 				}
 			},
 			
 			// TODO fetch for date range and language
-			
-			// TODO implement sorting
 			
 			// TODO fetch within a certain range
 			

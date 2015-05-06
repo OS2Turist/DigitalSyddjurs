@@ -2,26 +2,20 @@ var geolib = require("geolib");
 var args = arguments[0] || {};
 var arrangementer = Alloy.Collections.instance("Arrangement");
 var listloadinprogress = false;
-
-// MOCK, get the system language
-var lan = Ti.Locale.currentLanguage;
+var curpos = null;
 
 function doItemclick(e){
 	Ti.API.info("ItemClicked");	
 }
 
-
-var curpos = {latitude: 55.49015426635742, longitude: 9.47851276397705};
-
-function loadEventList(){
-	if(Alloy.Globals.Tracker.CurrentPosition){
-		Ti.API.info(Alloy.Globals.Tracker.CurrentPosition);
+function loadEventList(position){
+	if(position){
 		listloadinprogress = true;
 		arrangementer.fetchForCurrentLanguage(Ti.Locale.getCurrentLanguage());
 		arrangementer.each(function(arrangement){
 			var dist = geolib.getDistance(
 		    	{latitude: parseFloat(arrangement.get("latitude")), longitude: parseFloat(arrangement.get("longitude"))},
-		    	Alloy.Globals.Tracker.CurrentPosition
+		    	position
 			);
 			arrangement.set({distance: dist});
 		});
@@ -51,20 +45,26 @@ function loadEventList(){
 }
 
 (function(){
+	// save the currentPosition
+	Ti.Geolocation.getCurrentPosition(function(position){
+		curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
+		//loadEventList(curpos);
+	});
 	
 	Ti.App.addEventListener("Tracker:locationchanged", function(e){
 		// The location has changed, reload the list
+		Ti.API.info("Tracker:locationchanged: " + JSON.stringify(e));
+		// save the current position
 		if(!listloadinprogress){
-			//loadEventList();	
+			//loadEventList(curpos);	
 		}
 	});
 	
 	Ti.App.addEventListener("ServiceListener:listdatachanged", function(e){
-		// The data has changed, reload the list
+		// The data has changed, reload the list with the current position
 		if(!listloadinprogress){
-			//loadEventList();	
+			//loadEventList(curpos);	
 		}
 	});
-	
-	//loadEventList();	
+
 })();

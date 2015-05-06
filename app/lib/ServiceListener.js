@@ -1,8 +1,6 @@
 var Drupal = require('drupal');
 // This Class is responsible for calling the drupal service and fetch the latest data on regular intervals
 
-
-
 function ServiceListener(serviceuser, serviceroot, serviceendpoint){
 	
 	var _user = serviceuser;

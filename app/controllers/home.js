@@ -1,7 +1,7 @@
 var args = arguments[0] || {};
 
 function doTest(e){
-	Ti.API.info(JSON.stringify(Alloy.Globals.Tracker.CurrentPosition));	
+	Ti.API.info(JSON.stringify(Alloy.Globals.Tracker.currentPosition));	
 }
 
 

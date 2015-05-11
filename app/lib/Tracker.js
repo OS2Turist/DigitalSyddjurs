@@ -2,8 +2,7 @@
 var geolib = require("geolib");
 /**
  * Class that wraps the fetching of position
- * This will be implemented globally
- * @param {integer} interval
+ *  * @param {integer} interval
  */
 function Tracker(interval){
 	var self = this;
@@ -20,14 +19,18 @@ function Tracker(interval){
 	Ti.Geolocation.getCurrentPosition(function(position){
 		_lastPosition = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
 	});
-
 	
+	/**
+	 * Returns last known position
+	 */
+	this.getCurrentPosition = function(){
+		return _lastPosition;
+	};
 	
 	/**
 	 * Start the timer to update the position and fire an App wide event if the position has changed more than the set trigger range
 	 */
 	var timer = setInterval(function(){
-		
 		Ti.Geolocation.getCurrentPosition(function(position){
 			// If the current position has moved more than 100 meter from the last one, we need to fire an event
 			var pos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
@@ -38,5 +41,4 @@ function Tracker(interval){
 		});
 	},_interval);
 }
-
 module.exports = Tracker;

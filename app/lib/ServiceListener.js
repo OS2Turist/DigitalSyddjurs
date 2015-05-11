@@ -58,29 +58,32 @@ function ServiceListener(serviceuser, serviceroot, serviceendpoint){
 	 * Public instance method that loads data form the service and returns through the callback
 	 */
 	this.loadData = function(callback){
-		drupal.login(_user.name, _user.pass,
-		    function(userData) {
-		        // Lets fetch the data
-		        var latestBackendTimestamp = "";
-		        if(Ti.App.Properties.hasProperty("latestBackendTimestamp")){
-		        	latestBackendTimestamp = Ti.App.Properties.getString("latestBackendTimestamp");
-		        }
-		        drupal.getResourceNoExtention("content/get", latestBackendTimestamp,
-			        function(responseData){
-			        	if(typeof(callback) === "function"){
-			        		callback(responseData);
-			        	}else{
-			        		return responseData;
-			        	}
-			        },
-			        function(err){
-			        	Ti.API.info("failed" + JSON.stringify(err));
-			        }); //resourceName, args, success, failure, headers;
-		    },
-		    function(err){
-		        Ti.API.info('login failed.' + JSON.stringify(err));
-		    }
-		);
+		// If we have network, we try to load fresh data
+		if(Ti.Network.online){
+			drupal.login(_user.name, _user.pass,
+			    function(userData) {
+			        // Lets fetch the data
+			        var latestBackendTimestamp = "";
+			        if(Ti.App.Properties.hasProperty("latestBackendTimestamp")){
+			        	latestBackendTimestamp = Ti.App.Properties.getString("latestBackendTimestamp");
+			        }
+			        drupal.getResourceNoExtention("content/get", latestBackendTimestamp,
+				        function(responseData){
+				        	if(typeof(callback) === "function"){
+				        		callback(responseData);
+				        	}else{
+				        		return responseData;
+				        	}
+				        },
+				        function(err){
+				        	Ti.API.info("failed" + JSON.stringify(err));
+				        }); //resourceName, args, success, failure, headers;
+			    },
+			    function(err){
+			        Ti.API.info('login failed.' + JSON.stringify(err));
+			    }
+			);
+		}
 	};
 	
 	/**

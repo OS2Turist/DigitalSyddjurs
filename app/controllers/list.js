@@ -56,7 +56,7 @@ function loadEventList(position){
 		Ti.API.info("Tracker:locationchanged: " + JSON.stringify(e));
 		// save the current position
 		if(!listloadinprogress){
-			//loadEventList(curpos);	
+			loadEventList(curpos);	
 		}
 	});
 	

@@ -6,6 +6,7 @@ exports.definition = {
 			"id": "INTEGER PRIMARY KEY AUTOINCREMENT",
 		    "nid": "integer",
 		    "language": "text",
+		    "kategori": "integer",
 		    "title": "text",
 		    "subtitle": "text",
 		    "from_date": "integer",
@@ -20,6 +21,7 @@ exports.definition = {
 		defaults: {
 			nid: 0,
 			language: "",
+			kategori: 0,
 			title: "",
 			subtitle: "",
 			from_date: 0,

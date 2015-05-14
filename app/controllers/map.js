@@ -10,6 +10,7 @@ var defaultlocation = {latitude:56.369152, longitude:10.583272,latitudeDelta:0.7
 
 var mapview = Alloy.Globals.Map.createView({
 	id: "mapview",
+	zIndex: -1,
 	mapType: Alloy.Globals.Map.NORMAL_TYPE,
 	region: defaultlocation, 
     animate:true,
@@ -72,7 +73,7 @@ function doFocus(e){
 	$.settingsmenu.init({parentController: $});
 
 	// Add the map to the window
-	$.mapwin.add(mapview);
+	$.win.add(mapview);
 
 	mapview.add(centerButton);
 	// Load the locations and events

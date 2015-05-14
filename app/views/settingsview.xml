@@ -1,5 +1,5 @@
 <Alloy>
-	<TableView id="settingsview" class="topcontainer" left="-150" width="150">
+	<TableView id="settingsview" zIndex="1" top="0" left="-260" width="260">
         <TableViewSection id="sectionFruit" headerTitle="Fruit">
             <TableViewRow title="Apple"/>
             <TableViewRow title="Bananas"/>

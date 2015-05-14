@@ -1,5 +1,5 @@
 <Alloy>
-	<Window title="L('listtitle')">
+	<Window title="L('listtitle')" id="win">
 		<RightNavButton>
 			<Button id="menubutton" image="Menu.png" />
 		</RightNavButton>>

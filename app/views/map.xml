@@ -1,5 +1,5 @@
 <Alloy>
-	<Window onFocus="doFocus" id="mapwin" title="L('maptitle')">
+	<Window onFocus="doFocus" id="win" title="L('maptitle')">
 		<RightNavButton>
 			<Button id="menubutton" image="Menu.png" />
 		</RightNavButton>>

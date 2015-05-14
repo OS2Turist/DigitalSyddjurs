@@ -13,7 +13,10 @@ function doChangeKm(e){
 	$.win.title = L('hometitle') + " " + String.format("%d", e.value) + " KM";
 }
 
+
 (function(){
+	// pass reference to the required menu view
+	$.settingsmenu.init({parentController: $});
 	doChangeKm($.sldKmSetting);	
 })();
 

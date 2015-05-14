@@ -1,7 +1,7 @@
 <Alloy>
 	<Window id="win" title="L('hometitle')">
 		<RightNavButton>
-			<Button image="Menu.png" />
+			<Button id="menubutton" image="Menu.png" />
 		</RightNavButton>>
 		<View class="topcontainer" height="Ti.UI.FILL">
 			<Button onClick="doTest" top="40">Test globals tracker</Button>
@@ -11,5 +11,6 @@
 				<Slider id="sldKmSetting" min="1" max="20" width="100%" value="4" onChange="doChangeKm"/>
 			</View>
 		</View>
+		<Require id="settingsmenu" src="settingsview" />
 	</Window>
 </Alloy>

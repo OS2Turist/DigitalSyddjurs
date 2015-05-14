@@ -69,6 +69,8 @@ function doFocus(e){
 // wait a few and then center on current location
 
 (function(){
+	$.settingsmenu.init({parentController: $});
+
 	// Add the map to the window
 	$.mapwin.add(mapview);
 

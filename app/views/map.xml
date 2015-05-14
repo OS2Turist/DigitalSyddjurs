@@ -1,4 +1,9 @@
 <Alloy>
 	<Window onFocus="doFocus" id="mapwin" title="L('maptitle')">
+		<RightNavButton>
+			<Button id="menubutton" image="Menu.png" />
+		</RightNavButton>>
 	</Window>
+	<Require id="settingsmenu" src="settingsview" />
+
 </Alloy>

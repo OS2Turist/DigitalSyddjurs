@@ -1,0 +1,16 @@
+<Alloy>
+	<TableView id="settingsview" class="topcontainer" left="-150" width="150">
+        <TableViewSection id="sectionFruit" headerTitle="Fruit">
+            <TableViewRow title="Apple"/>
+            <TableViewRow title="Bananas"/>
+        </TableViewSection>
+        <TableViewSection id="sectionVeg" headerTitle="Vegetables">
+            <TableViewRow title="Carrots"/>
+            <TableViewRow title="Potatoes"/>
+        </TableViewSection>
+        <TableViewSection id="sectionFish" headerTitle="Fish">
+            <TableViewRow title="Cod"/>
+            <TableViewRow title="Haddock"/>
+        </TableViewSection>
+	</TableView>
+</Alloy>

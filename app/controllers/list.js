@@ -45,6 +45,9 @@ function loadEventList(position){
 }
 
 (function(){
+	
+	$.settingsmenu.init({parentController: $});
+
 	// save the currentPosition
 	Ti.Geolocation.getCurrentPosition(function(position){
 		curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};

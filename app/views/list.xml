@@ -1,5 +1,8 @@
 <Alloy>
 	<Window title="L('listtitle')">
+		<RightNavButton>
+			<Button id="menubutton" image="Menu.png" />
+		</RightNavButton>>
 		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
 				<Templates>
@@ -21,5 +24,6 @@
 				</PullView>
 			</ListView>		
 		</ScrollView>
+		<Require id="settingsmenu" src="settingsview" />
 	</Window>
 </Alloy>

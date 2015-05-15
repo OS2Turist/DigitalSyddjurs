@@ -45,7 +45,9 @@ function loadEventList(position){
 }
 
 (function(){
-	
+
+	// TODO REFACTOR seperate the sorting of the list and only do a resort when position changes
+
 	$.settingsmenu.init({parentController: $});
 
 	// save the currentPosition
@@ -66,8 +68,12 @@ function loadEventList(position){
 	Ti.App.addEventListener("ServiceListener:listdatachanged", function(e){
 		// The data has changed, reload the list with the current position
 		if(!listloadinprogress){
-			//loadEventList(curpos);	
+			loadEventList(curpos);	
 		}
 	});
+
+	if(!listloadinprogress){
+			loadEventList(curpos);	
+		}
 
 })();

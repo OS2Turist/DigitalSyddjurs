@@ -51,6 +51,11 @@ function closeMenu(){
 	}
 }
 
+function languageFilter(collection) {
+	var lan = Ti.Locale.currentLanguage;
+	return collection.where({language: lan});
+}
+
 (function(){
 	
 })();

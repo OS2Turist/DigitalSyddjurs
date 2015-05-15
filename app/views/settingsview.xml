@@ -1,16 +1,6 @@
 <Alloy>
-	<TableView id="settingsview" zIndex="1" top="0" left="-260" width="260">
-        <TableViewSection id="sectionFruit" headerTitle="Fruit">
-            <TableViewRow title="Apple"/>
-            <TableViewRow title="Bananas"/>
-        </TableViewSection>
-        <TableViewSection id="sectionVeg" headerTitle="Vegetables">
-            <TableViewRow title="Carrots"/>
-            <TableViewRow title="Potatoes"/>
-        </TableViewSection>
-        <TableViewSection id="sectionFish" headerTitle="Fish">
-            <TableViewRow title="Cod"/>
-            <TableViewRow title="Haddock"/>
-        </TableViewSection>
+	<Collection src="Kategori" />
+	<TableView id="settingsview" zIndex="1" top="0" left="-260" width="260" dataCollection="Kategori" dataFilter="languageFilter">
+        <TableViewRow title="{title}"/>
 	</TableView>
 </Alloy>

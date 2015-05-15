@@ -61,11 +61,7 @@ exports.definition = {
 			comparator: function(collection){
 				return collection.get(this.sortField);
 			},
-			sortBy: function(iterator, context){
-				var onbj = this.models;
-				var direction = this.sortDirection;
-				
-			},sortBy: function (iterator, context) {
+			sortBy: function (iterator, context) {
                 var obj = this.models;
                 var direction = this.sortDirection;
  

@@ -2,12 +2,12 @@ exports.definition = {
 	config: {
 		columns: {
 		    "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-		    "nid": "integer",
+		    "tid": "integer",
 		    "language": "text",
 		    "title": "text"
 		},
 		default: {
-			nid: 0,
+			tid: -1,
 			language: "da",
 			title: "Kategori titel"
 		},
@@ -37,7 +37,6 @@ exports.definition = {
 			}
 			*/
 		});
-
 		return Collection;
 	}
 };

@@ -4,12 +4,14 @@ exports.definition = {
 		    "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
 		    "tid": "integer",
 		    "language": "text",
-		    "title": "text"
+		    "title": "text",
+		    "selected": "integer"
 		},
 		default: {
 			tid: -1,
 			language: "da",
-			title: "Kategori titel"
+			title: "Kategori titel",
+			selected: 1
 		},
 		adapter: {
 			type: "sql",

@@ -53,6 +53,8 @@ function closeMenu(){
 
 function languageFilter(collection) {
 	var lan = Ti.Locale.currentLanguage;
+	// TODO remove this TEST fixture
+	lan = "da";
 	return collection.where({language: lan});
 }
 

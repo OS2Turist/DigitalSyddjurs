@@ -46,14 +46,12 @@ function loadEventList(position){
 
 (function(){
 
-	// TODO REFACTOR seperate the sorting of the list and only do a resort when position changes
-
 	$.settingsmenu.init({parentController: $});
 
 	// save the currentPosition
 	Ti.Geolocation.getCurrentPosition(function(position){
 		curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
-		//loadEventList(curpos);
+		loadEventList(curpos);
 	});
 	
 	Ti.App.addEventListener("Tracker:locationchanged", function(e){
@@ -72,8 +70,5 @@ function loadEventList(position){
 		}
 	});
 
-	if(!listloadinprogress){
-			loadEventList(curpos);	
-		}
 
 })();

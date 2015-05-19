@@ -58,7 +58,8 @@ function KategoriHandler(serviceuser, serviceroot, serviceendpoint){
 					newkat = Alloy.createModel("Kategori",{
 						tid: obj.tid,
 						language: key,
-						title: obj.name[key][0].safe_value
+						title: obj.name[key][0].safe_value,
+						selected: 1
 					});
     				newkat.save();
     				kategorier.add(newkat);

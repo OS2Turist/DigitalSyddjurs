@@ -1,6 +1,6 @@
 <Alloy>
 	<Collection src="Kategori" />
-	<TableView id="settingsview" zIndex="1" top="0" left="-260" width="260" dataCollection="Kategori" dataFilter="languageFilter">
-        <TableViewRow hasCheck="{selected}" title="{selected} {title}"/>
+	<TableView id="settingsview" zIndex="1" top="0" left="-320" width="320" dataCollection="Kategori" dataFilter="languageFilter">
+        <TableViewRow katid="{id}" language="{language}" hasCheck="{selected}" title="{title}" onClick="rowClicked" />
 	</TableView>
 </Alloy>

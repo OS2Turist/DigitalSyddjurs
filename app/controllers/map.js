@@ -1,12 +1,12 @@
 var args = arguments[0] || {};
 var arrangementer = Alloy.Collections.instance("Arrangement");
+var kategorier = Alloy.Collections.instance("Kategori");
 
 var firstfocus = true;
 // We do not need the best accuracy, so lets save some power
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_NEAREST_TEN_METERS;
 // Centreret på djursland
 var defaultlocation = {latitude:56.369152, longitude:10.583272,latitudeDelta:0.7, longitudeDelta:0.7};
-
 
 var mapview = Alloy.Globals.Map.createView({
 	id: "mapview",
@@ -19,10 +19,11 @@ var mapview = Alloy.Globals.Map.createView({
 });
 
 function loadAnnotations(){
-	var pins = [];	 
+	var pins = [];
+	var kat_arr = kategorier.getSelectedArray();
 	if(mapview){
 		mapview.removeAllAnnotations();
-		arrangementer.fetchForCurrentLanguage();
+		arrangementer.fetchWithKategoriFilter(kat_arr);
 		arrangementer.each(function(arrangement){
 			pins.push(Alloy.Globals.Map.createAnnotation({
 				titleid: arrangement.get("id"),
@@ -78,6 +79,12 @@ function doFocus(e){
 	mapview.add(centerButton);
 	// Load the locations and events
 	
+	
 	loadAnnotations();
+	
+	kategorier.on('sync', function(){
+		loadAnnotations();
+		//Ti.API.info("change fired on kategorier");
+	});
 	
 })();

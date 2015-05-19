@@ -30,24 +30,7 @@ $.init = function(initargs){
 };
 
 function rowClicked(e){
-	
-	
-	var res_kat = Alloy.Collections.Kategori.get(e.row.katid);
-	
-	Ti.API.info("Data found: " + JSON.stringify(res_kat));
-	if(e.row.hasCheck){
-		//e.row.hasCheck = 0;
-		res_kat.set({
-			selected: 0
-		});
-	}else{
-		//e.row.hasCheck = 1;
-		res_kat.set({
-			selected: 1
-		});
-	}
-	
-	res_kat.save();
+	Alloy.Collections.Kategori.setSelected(e.row.katid, (1 - parseInt(e.row.hasCheck,10)));
 	Alloy.Collections.Kategori.fetch();
 }
 
@@ -81,5 +64,6 @@ function languageFilter(collection) {
 }
 
 (function(){
+	Alloy.Collections.Kategori.fetch();
 	
 })();

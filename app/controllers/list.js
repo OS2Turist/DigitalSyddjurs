@@ -1,6 +1,7 @@
 var geolib = require("geolib");
 var args = arguments[0] || {};
 var arrangementer = Alloy.Collections.instance("Arrangement");
+var kategorier = Alloy.Collections.instance("Kategori");
 var listloadinprogress = false;
 var curpos = null;
 
@@ -11,7 +12,8 @@ function doItemclick(e){
 function loadEventList(position){
 	if(position){
 		listloadinprogress = true;
-		arrangementer.fetchForCurrentLanguage(Ti.Locale.getCurrentLanguage());
+		var kat_arr = kategorier.getSelectedArray();
+		arrangementer.fetchWithKategoriFilter(kat_arr);
 		arrangementer.each(function(arrangement){
 			var dist = geolib.getDistance(
 		    	{latitude: parseFloat(arrangement.get("latitude")), longitude: parseFloat(arrangement.get("longitude"))},
@@ -56,7 +58,6 @@ function loadEventList(position){
 	
 	Ti.App.addEventListener("Tracker:locationchanged", function(e){
 		// The location has changed, reload the list
-		Ti.API.info("Tracker:locationchanged: " + JSON.stringify(e));
 		// save the current position
 		if(!listloadinprogress){
 			loadEventList(curpos);	
@@ -69,6 +70,11 @@ function loadEventList(position){
 			loadEventList(curpos);	
 		}
 	});
+	
+	kategorier.on('sync', function(){
+		loadEventList(curpos);	
+	});
+	
 
 
 })();

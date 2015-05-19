@@ -83,10 +83,9 @@ exports.definition = {
                     return left.index < right.index ? -1 : 1;
                 }), 'value');
             },
-			// extended functions and properties go here
-			fetchForCurrentLanguage : function(){
+			fetchWithKategoriFilter : function(kat_arr){
 				var table = this.config.adapter.collection_name;
-				return this.fetch({query:'SELECT * from ' + table + ' where language="' + Ti.Locale.currentLanguage + '"'});
+				return this.fetch({query:'SELECT * from ' + table + ' where kategori IN (' + kat_arr.join(",") + ') AND language="' + Ti.Locale.currentLanguage + '"'});
 			},
 			cleanUpAndSync: function(active_arr){
 				if(active_arr ? active_arr.length > 0 : false){
@@ -102,7 +101,7 @@ exports.definition = {
 				}else{
 					return false;
 				}
-			},
+			}
 			
 			// TODO fetch for date range and language
 			

@@ -7,21 +7,25 @@
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
 				<Templates>
 					<ItemTemplate name="template">
-						<View layout="horizontal" height="Ti.UI.SIZE" width="Ti.UI.FILL">
-							<View layout="vertical" height="Ti.UI.SIZE" height="68dp" bindId="rowView">
-								<Label class="itemlabel" bindId="title" id="title" />
-								<Label class="itemdistance" bindId="distance" id="distance"/>
+						<View layout="horizontal" left="2" right="2" top="1" bottom="1" height="Ti.UI.SIZE" width="Ti.UI.FILL" bindId="rowView">
+							<ImageView bindId="arrimage" id="arrimage" />
+							<View layout="vertical" width="60%" height="50">
+								<Label bindId="title" left="2" id="title" />
 							</View>
-							<!--<ImageView class="itemimage" width="50" height="50" bindId="arrimage" id="arrimage" />-->
+							<View width="20%" height="50">
+								<Label bindId="distance" left="2" id="distance"/>
+							</View>
 						</View>
 					</ItemTemplate>
 				</Templates>
 				<ListSection />
+<!--
 				<PullView>
 					<View>
 						<Label>Hjælpe tekst her, eller 'release to update'?</Label>
 					</View>
 				</PullView>
+-->				
 			</ListView>		
 		</ScrollView>
 		<Require id="settingsmenu" src="settingsview" />

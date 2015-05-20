@@ -6,7 +6,21 @@ var listloadinprogress = false;
 var curpos = null;
 
 function doItemclick(e){
-	Ti.API.info("ItemClicked");	
+	Ti.API.info("ItemClicked " + e.section.getItemAt(e.itemIndex).rowView.model );
+	if(e.accessoryClicked){
+		// Show the detail window and using $model to pass data
+		var args = {"modelid": e.section.getItemAt(e.itemIndex).rowView.model};
+		var detailwin = Alloy.createController("details", args).getView();
+		detailwin.open();	
+	}	
+}
+
+function formatDistance(rawdist){
+	if(rawdist > 999){
+		return (rawdist / 1000).toFixed(1).toLocaleString() + " km";
+	}else{
+		return rawdist + "  m";
+	}
 }
 
 function loadEventList(position){
@@ -29,14 +43,13 @@ function loadEventList(position){
 		var col = {};
 		arrangementer.each(function(arrangement){
 			prop = {height: Ti.UI.SIZE, backgroundColor: "#FFF", accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DETAIL};
+			var dist = formatDistance(arrangement.get("distance"));
 			arr.push({ 
 				properties: prop,
 				rowView: {model: arrangement.get("id")},
 				title: {text: arrangement.get("title"), color: "#000"},
-				distance: {text: arrangement.get("distance"), color: '#000'}
-				//arrimage: {image: arrangement.get("imageuri")}
-				
-				//subtitle: {text: arrangement.get("subtitle"), color: "#000"}	
+				distance: {text: dist, color: '#000'},
+				arrimage: {image: arrangement.get("imageuri"), width: 50, height:50, borderRadius: 25}
 			});
 		});
 		$.lvEvents.sections[0].setItems(arr);	

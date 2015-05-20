@@ -86,6 +86,18 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		}
 	};
 	
+	function getUrl(node){
+		if(node ? node.und : false){
+			retval = node.und[0].url;	
+		}
+		return "";
+	}
+	function getUndSafeValue(node){
+		if(node ? node.und : false){
+			retval = node.und[0].safe_value;	
+		}
+		return "";
+	}
 	/**
 	 *  public instance method for processing and storing the data returned by the service
 	 */
@@ -113,6 +125,14 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		    				to_date: getAndFormatDate(obj.field_show_to),
 		    				latitude: obj.locations[0].latitude,
 		    				longitude: obj.locations[0].longitude,
+		    				street1: obj.locations[0].street,
+		    				street2: obj.locations[0].additional,
+		    				postal_code: obj.locations[0].postal_code,
+		    				city: obj.locations[0].city,
+		    				country_name: obj.locations[0].country_name,
+		    				url: getUrl(obj.field_offer_url),
+		    				email: getUndSafeValue(obj.field_offer_email),
+		    				phone: getUndSafeValue(obj.field_phone),
 		    				distance: 0,
 	    					imageuri: imageuri,
 	    					imageextension : imageext,

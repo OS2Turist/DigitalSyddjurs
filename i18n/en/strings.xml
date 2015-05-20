@@ -31,5 +31,7 @@
 
 	<!-- History screen -->
 	<string name="history_title">History</string>
-
+	
+	<!-- Details screen -->
+	<string name="details_title">Details</string>
 </resources>

@@ -32,4 +32,7 @@
 	<!-- History screen -->
 	<string name="history_title">Historik</string>
 
+	<!-- Details screen -->
+	<string name="details_title">Detaljer</string>
+
 </resources>

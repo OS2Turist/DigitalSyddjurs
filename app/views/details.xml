@@ -1,8 +1,16 @@
 <Alloy>
-	<Window id="detailwin">
-		<View class="topcontainer">
-			
-			<Label>Viser detaljer om events og attraktioner. Evt. animeret åbning?</Label>
-		</View>
-	</Window>
+	<NavigationWindow id="navwin">
+		<Window title="L(details_title)" layout="vertical" id="win" onClose="doClose">
+			<LeftNavButton platform="ios">
+				<Button title="L(back_button)" onClick="doClickBack" />
+			</LeftNavButton>
+			<View>
+				<View layout="vertical">
+					<Label id="arr_title" />
+					<ImageView id="arr_image" />
+					<Label id="arr_subtitle" />
+				</View>
+			</View>
+		</Window>
+	</NavigationWindow>
 </Alloy>

@@ -6,12 +6,11 @@ var listloadinprogress = false;
 var curpos = null;
 
 function doItemclick(e){
-	Ti.API.info("ItemClicked " + e.section.getItemAt(e.itemIndex).rowView.model );
 	if(e.accessoryClicked){
 		// Show the detail window and using $model to pass data
 		var args = {"modelid": e.section.getItemAt(e.itemIndex).rowView.model};
 		var detailwin = Alloy.createController("details", args).getView();
-		detailwin.open();	
+		detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});	
 	}	
 }
 
@@ -25,6 +24,7 @@ function formatDistance(rawdist){
 
 function loadEventList(position){
 	if(position){
+		var bubbles = [];
 		listloadinprogress = true;
 		var kat_arr = kategorier.getSelectedArray();
 		arrangementer.fetchWithKategoriFilter(kat_arr);
@@ -39,16 +39,14 @@ function loadEventList(position){
 			
 			if(geolib.isPointInCircle(arrpos, position, Alloy.Globals.searchradius * 1000)){
 				// We found one
-				Ti.App.fireEvent("Discovery:foundone", arrangement.toJSON());
+				bubbles.push(arrangement.toJSON());
 			}else{
-				// this one should be romoved
+				// this one should be removed from the bubbles
 				Ti.App.fireEvent("Discovery:lostone", arrangement.toJSON());
 			}
-			
-			
-			
-			
 		});
+		Ti.App.fireEvent("Discovery:foundsome", {list: bubbles});
+		
 		arrangementer.setSortField("distance", "ASC");
 		arrangementer.sort();
 		
@@ -79,9 +77,7 @@ function loadEventList(position){
 
 	// initialize with the currentPosition
 	Ti.Geolocation.getCurrentPosition(function(position){
-		// TODO remove this test fixture
-		curpos  = {"latitude": 55.487251, "longitude": 9.471542};
-		//curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
+		curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
 		loadEventList(curpos);
 	});
 	
@@ -108,8 +104,4 @@ function loadEventList(position){
 	kategorier.on('sync', function(){
 		loadEventList(curpos);	
 	});
-	
-	
-
-
 })();

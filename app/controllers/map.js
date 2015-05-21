@@ -25,14 +25,29 @@ function loadAnnotations(){
 		mapview.removeAllAnnotations();
 		arrangementer.fetchWithKategoriFilter(kat_arr);
 		arrangementer.each(function(arrangement){
-			pins.push(Alloy.Globals.Map.createAnnotation({
+			
+			var img = Ti.UI.createImageView({
+				id: arrangement.get("id"), 
+				image: arrangement.get("imageuri"),
+				width: 40,
+				height: 40,
+				borderRadius: 20,
+			});
+			img.addEventListener('click', function(e){
+					var args = {"modelid": e.source.id};
+					var detailwin = Alloy.createController("details", args).getView();
+					detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});	
+			});
+			var pin = Alloy.Globals.Map.createAnnotation({
 				titleid: arrangement.get("id"),
 			    latitude: arrangement.get("latitude"),
 			    longitude: arrangement.get("longitude"),
 			    title: arrangement.get("title"),
+			    rightView: img,
 			    animate: true,
 			    draggable:false
-			}));
+			});
+			pins.push(pin);
 		});
 		
 		mapview.addAnnotations(pins);
@@ -71,7 +86,6 @@ function doFocus(e){
 // wait a few and then center on current location
 
 (function(){
-	$.settingsmenu.init({parentController: $});
 
 	// Add the map to the window
 	$.win.add(mapview);

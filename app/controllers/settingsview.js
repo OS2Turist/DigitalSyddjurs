@@ -14,13 +14,13 @@ $.init = function(initargs){
 	    	openMenu();
 	    }
 	});
-	
+	/*
 	args.parentController.win.addEventListener("swipe", function(e){
 		if(e.direction === "right"){
 			openMenu();
 		}
 	});
-	
+	*/
 	$.settingsview.addEventListener("swipe", function(e){
 		// handle swipe left on the settings
 		if(e.direction === "left"){

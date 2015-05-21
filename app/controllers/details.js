@@ -13,8 +13,6 @@ function doClickBack(e){
 		$.win.close();
 	}
 }
-
-
 (function(){
 	var arr = Alloy.Collections.Arrangement.get(args.modelid);
 	$.title.text = arr.get("title");	
@@ -27,20 +25,5 @@ function doClickBack(e){
 	$.url.text = arr.get("url");
 	$.email.text = arr.get("email");
 	$.phone.text = arr.get("phone");
-	
-	
-	/*
-			    "latitude": "text",
-		    "longitude": "text",
-		    "street1": "text",
-		    "street2": "text",
-		    "postal_code": "text",
-		    "city": "text",
-		    "country_name": "text",
-		    "url": "text",
-		    "email": "text",
-		    "phone": "text", 
-		    "distance" : "integer",	
-		    
-		    */
+
 })();

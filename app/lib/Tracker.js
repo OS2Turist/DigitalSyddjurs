@@ -17,11 +17,7 @@ function Tracker(interval){
 	}
 	
 	Ti.Geolocation.getCurrentPosition(function(position){
-		// TODO remove this test fixture
-		_lastPosition = {"latitude": 55.487251, "longitude": 9.471542};
-		
-		
-		//_lastPosition = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
+		_lastPosition = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
 	});
 	
 	/**
@@ -37,9 +33,7 @@ function Tracker(interval){
 	var timer = setInterval(function(){
 		Ti.Geolocation.getCurrentPosition(function(position){
 			// If the current position has moved more than 100 meter from the last one, we need to fire an event
-			// TODO remove this test fixture
-			var pos = {"latitude": 55.487251, "longitude": 9.471542};
-			//var pos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
+			var pos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
 			if(geolib.getDistance(_lastPosition, pos, 10) > _trigger_range){
 				_lastPosition = pos;
 				Ti.App.fireEvent("Tracker:locationchanged", pos);

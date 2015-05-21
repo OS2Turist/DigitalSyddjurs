@@ -9,7 +9,7 @@
 			</View>
 			<View top="85%" layout="vertical" left="5%" width="90%">
 				<Label id="lblKmSetting" right="0"/>
-				<Slider id="sldKmSetting" min="1" max="20" width="100%" value="4" onChange="doChangeKm" />
+				<Slider id="sldKmSetting" min="1" max="20" width="100%" value="4" onStop="doChangeKm" />
 			</View>
 		</View>
 		<Require id="settingsmenu" src="settingsview" />

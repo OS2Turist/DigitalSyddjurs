@@ -4,6 +4,4 @@
 			<Button id="menubutton" image="Menu.png" />
 		</RightNavButton>>
 	</Window>
-	<Require id="settingsmenu" src="settingsview" />
-
 </Alloy>

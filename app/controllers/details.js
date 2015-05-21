@@ -17,7 +17,30 @@ function doClickBack(e){
 
 (function(){
 	var arr = Alloy.Collections.Arrangement.get(args.modelid);
-	$.arr_title.text = arr.get("title");	
-	$.arr_image.image = arr.get("imageuri");
-	$.arr_subtitle.text = arr.get("subtitle");	
+	$.title.text = arr.get("title");	
+	$.image.image = arr.get("imageuri");
+	$.subtitle.text = arr.get("subtitle");
+	$.street1.text = arr.get("street1");
+	$.street2.text = arr.get("street2");
+	$.postal_code.text = arr.get("postal_code");
+	$.city.text = arr.get("city");
+	$.url.text = arr.get("url");
+	$.email.text = arr.get("email");
+	$.phone.text = arr.get("phone");
+	
+	
+	/*
+			    "latitude": "text",
+		    "longitude": "text",
+		    "street1": "text",
+		    "street2": "text",
+		    "postal_code": "text",
+		    "city": "text",
+		    "country_name": "text",
+		    "url": "text",
+		    "email": "text",
+		    "phone": "text", 
+		    "distance" : "integer",	
+		    
+		    */
 })();

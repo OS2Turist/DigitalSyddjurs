@@ -6,9 +6,17 @@
 			</LeftNavButton>
 			<View>
 				<View layout="vertical">
-					<Label id="arr_title" />
-					<ImageView id="arr_image" />
-					<Label id="arr_subtitle" />
+					<Label id="title" />
+					<ImageView id="image" />
+					<Label id="subtitle" />
+					<Label id="url" />
+					<Label id="email" />
+					<Label id="phone" />
+					<Label id="street1" />
+					<Label id="street2" />
+					<View layout="vertical" width="Ti.UI.SIZE" height="Ti.UI.SIZE">
+						<Label id="postal_code" /><Label left="4" id="city" />
+					</View>
 				</View>
 			</View>
 		</Window>

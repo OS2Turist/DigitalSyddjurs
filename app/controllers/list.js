@@ -29,11 +29,25 @@ function loadEventList(position){
 		var kat_arr = kategorier.getSelectedArray();
 		arrangementer.fetchWithKategoriFilter(kat_arr);
 		arrangementer.each(function(arrangement){
+			var arrpos = {latitude: parseFloat(arrangement.get("latitude")), longitude: parseFloat(arrangement.get("longitude"))};
 			var dist = geolib.getDistance(
-		    	{latitude: parseFloat(arrangement.get("latitude")), longitude: parseFloat(arrangement.get("longitude"))},
+		    	arrpos,
 		    	position
 			);
 			arrangement.set({distance: dist});
+			// Check if the event is inside the search range
+			
+			if(geolib.isPointInCircle(arrpos, position, Alloy.Globals.searchradius * 1000)){
+				// We found one
+				Ti.App.fireEvent("Discovery:foundone", arrangement.toJSON());
+			}else{
+				// this one should be romoved
+				Ti.App.fireEvent("Discovery:lostone", arrangement.toJSON());
+			}
+			
+			
+			
+			
 		});
 		arrangementer.setSortField("distance", "ASC");
 		arrangementer.sort();
@@ -63,15 +77,18 @@ function loadEventList(position){
 
 	$.settingsmenu.init({parentController: $});
 
-	// save the currentPosition
+	// initialize with the currentPosition
 	Ti.Geolocation.getCurrentPosition(function(position){
-		curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
+		// TODO remove this test fixture
+		curpos  = {"latitude": 55.487251, "longitude": 9.471542};
+		//curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
 		loadEventList(curpos);
 	});
 	
-	Ti.App.addEventListener("Tracker:locationchanged", function(e){
+	Ti.App.addEventListener("Tracker:locationchanged", function(position){
 		// The location has changed, reload the list
-		// save the current position
+		// save the new position
+		curpos = {"latitude": position.coords.latitude, "longitude": position.coords.longitude};
 		if(!listloadinprogress){
 			loadEventList(curpos);	
 		}
@@ -84,9 +101,14 @@ function loadEventList(position){
 		}
 	});
 	
+	Ti.App.addEventListener("Discovery:searchradiuschanged", function(e){
+		loadEventList(curpos);
+	});
+	
 	kategorier.on('sync', function(){
 		loadEventList(curpos);	
 	});
+	
 	
 
 

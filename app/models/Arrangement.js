@@ -58,6 +58,11 @@ exports.definition = {
 	extendModel: function(Model) {
 		_.extend(Model.prototype, {
 			// extended functions and properties go here
+			updateDistance: function(position){
+				var model = this;
+				model.set({distance: geolib.getDistance({latitude: parseFloat(model.get("latitude")), longitude: parseFloat(model.get("longitude"))},position)});
+				model.save();
+			}
 		});
 
 		return Model;
@@ -117,16 +122,26 @@ exports.definition = {
 				}else{
 					return false;
 				}
+			},
+			/**
+			 * Loop through the records and recalculate the distance to the current position of the device, end with calling sync to update databinding  
+ 			 * @param {Object} position
+			 */
+			updateDistanceAndSync: function(position){
+				var collection = this;
+				collection.each(function(model){
+					model.updateDistance(position);
+				});
+				collection.trigger('sync');
+				return true;
+			},
+			getEventsWithinRange: function(range){
+				var arr = this.models.filter(function(model) {
+				    return (model.get('distance') <= range);
+				 });
+				 return arr;
 			}
-			
-			// TODO fetch for date range and language
-			
-			// TODO fetch within a certain range
-			
-			// TODO fetch and add range
-			
 		});
-
 		return Collection;
 	}
 };

@@ -1,4 +1,5 @@
 <Alloy>
+	<Collection src="Arrangement" /> 
 	<Window title="L('listtitle')" id="win">
 		<RightNavButton>
 			<Button id="menubutton" image="Menu.png" />
@@ -8,7 +9,7 @@
 				<Templates>
 					<ItemTemplate name="template">
 						<View layout="horizontal" left="2" right="2" top="1" bottom="1" height="Ti.UI.SIZE" width="Ti.UI.FILL" bindId="rowView">
-							<ImageView bindId="arrimage" id="arrimage" />
+							<ImageView bindId="arrimage" top="2" id="arrimage" width="40" height="40" borderRadius="20" />
 							<View layout="vertical" width="60%" height="50">
 								<Label bindId="title" left="2" id="title" />
 							</View>
@@ -18,7 +19,9 @@
 						</View>
 					</ItemTemplate>
 				</Templates>
-				<ListSection />
+				<ListSection dataCollection="Arrangement" dataTransform="formatData">
+					<ListItem template="{template}" arrimage:image="{imageuri}" title:text="{title}" distance:text="{distanceString}"/>
+				</ListSection>
 <!--
 				<PullView>
 					<View>

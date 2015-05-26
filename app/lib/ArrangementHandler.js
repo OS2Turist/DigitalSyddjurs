@@ -156,16 +156,10 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	    	}
 	    });
 	    if(json_obj.info){
+	    	// Now the delete operation to clean up old events
+	    	arrangementer.cleanUpAndSync(json_obj.info.nids);
 	    	// grap the timestamp from info and clean up using the nid list
 	    	Ti.App.Properties.setString("latestBackendTimestamp", json_obj.info.timestamp);
-	    	// Now the delete operation to clean up old events
-	    	if(arrangementer.cleanUpAndSync(json_obj.info.nids)){
-	    		listchangedflag = true;	
-	    	}
-	    }
-	    // Notify the app that the list has changed
-	    if(listchangedflag){
-	    	Ti.App.fireEvent("ServiceListener:listdatachanged");
 	    }
 	};
 	

@@ -17,6 +17,7 @@ function ServiceListener(){
 	timer = setInterval(function(){
 		kh.loadKategorier(kh.processKategorier);	
 		ah.loadArrangementer(ah.processArrangementer);
+		
 	}, 300000);
 }
 

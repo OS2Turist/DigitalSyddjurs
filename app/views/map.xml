@@ -2,6 +2,7 @@
 	<Window onFocus="doFocus" id="win" title="L('maptitle')">
 		<RightNavButton>
 			<Button id="menubutton" image="Menu.png" />
-		</RightNavButton>>
+		</RightNavButton>
+		<Require id="settingsmenu" src="settingsview" />
 	</Window>
 </Alloy>

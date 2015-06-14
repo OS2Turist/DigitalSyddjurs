@@ -42,4 +42,5 @@ function formatData(model){
 	arrangementer.on('sync', function(){
 		refreshList();
 	});
+	refreshList();
 })();

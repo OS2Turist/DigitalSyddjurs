@@ -73,11 +73,11 @@ function updateGui(){
 	
 	// add sync listeners to the model
 	arrangementer.on('sync', function(){
-		Ti.API.info("Hey the Collection changed! do something");
+		//Ti.API.info("Hey the Collection changed! do something");
 		updateGui();
 	});
 	kategorier.on('sync', function(){
-		Ti.API.info("Hey the Collection changed! do something");
+		//Ti.API.info("Hey the Collection changed! do something");
 		updateGui();
 	});
 	

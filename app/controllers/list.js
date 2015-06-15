@@ -3,9 +3,10 @@ var kategorier = Alloy.Collections.instance("Kategori");
 var arrangementer = Alloy.Collections.Arrangement;
 
 function doItemclick(e){
+	Ti.API.info("doItemClick " + e);
 	if(e.accessoryClicked){
 		// Show the detail window and using $model to pass data
-		var args = {"modelid": e.section.getItemAt(e.itemIndex).rowView.model};
+		var args = {"modelid": e.section.getItemAt(e.itemIndex).id};
 		var detailwin = Alloy.createController("details", args).getView();
 		detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});	
 	}		

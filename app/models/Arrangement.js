@@ -62,7 +62,7 @@ exports.definition = {
 			// extended functions and properties go here
 			updateDistance: function(position){
 				var model = this;
-				model.set({distance: geolib.getDistance({latitude: parseFloat(model.get("latitude")), longitude: parseFloat(model.get("longitude"))},position)});
+				model.set({distance: geolib.getDistance({latitude: parseFloat(model.get("latitude")), longitude: parseFloat(model.get("longitude"))},position)}, {silent: true});
 				model.save();
 			}
 		});

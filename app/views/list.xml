@@ -20,7 +20,7 @@
 					</ItemTemplate>
 				</Templates>
 				<ListSection dataCollection="Arrangement" dataTransform="formatData">
-					<ListItem template="{template}" arrimage:image="{imageuri}" title:text="{title}" distance:text="{distanceString}"/>
+					<ListItem itemId="{id}" template="{template}" arrimage:image="{imageuri}" title:text="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
 				</ListSection>
 <!--
 				<PullView>

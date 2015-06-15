@@ -6,17 +6,21 @@
 			</LeftNavButton>
 			<View>
 				<View layout="vertical">
-					<Label id="title" />
-					<ImageView id="image" />
-					<Label id="subtitle" />
-					<Label id="url" />
-					<Label id="email" />
-					<Label id="phone" />
-					<Label id="street1" />
-					<Label id="street2" />
-					<View layout="vertical" width="Ti.UI.SIZE" height="Ti.UI.SIZE">
-						<Label id="postal_code" /><Label left="4" id="city" />
+					<View layout="horizontal">
+						<ImageView id="image" width="40%" />
+						<Label id="title" width="60%" />	
 					</View>
+					<View top="5">
+						<Label id="subtitle" />
+						<Label id="url" />
+						<Label id="email" />
+						<Label id="phone" />
+						<Label id="street1" />
+						<Label id="street2" />
+						<View layout="vertical" width="Ti.UI.SIZE" height="Ti.UI.SIZE">
+							<Label id="postal_code" /><Label left="4" id="city" />
+						</View>
+					</View>					
 				</View>
 			</View>
 		</Window>

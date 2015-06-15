@@ -1,15 +1,17 @@
 <Alloy>
 	<TabGroup>
-		<Tab title="L('hometab')">
+		<Tab icon="/Home.png" iconIsmask="true" title="L('hometab')">
 			<Require id="homewin" src="home" />
-		</Tab>			
-		<Tab title="L('profiletab')">
+		</Tab>		
+		<!--	
+		<Tab icon="/Settings.png" iconIsmask="true" title="L('profiletab')">
 			<Require id="profilewin" src="profile" />
-		</Tab>			
-		<Tab title="L('listtab')">
+		</Tab>
+		-->			
+		<Tab icon="/List.png" iconIsmask="true" title="L('listtab')">
 			<Require id="listwin" src="list" />
 		</Tab>			
-		<Tab title="L('maptab')">
+		<Tab icon="/Map.png" iconIsmask="true" title="L('maptab')">
 			<Require id="mapwin" src="map" />
 		</Tab>			
 	</TabGroup>

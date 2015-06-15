@@ -88,7 +88,7 @@ function updateGui(){
 
 
 	updateGui();
-	$.win.title = L('hometitle') + "4 KM";
+	$.win.title = L('hometitle') + " 4 KM";
 
 
 })();

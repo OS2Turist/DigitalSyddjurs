@@ -93,10 +93,22 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		return "";
 	}
 	function getUndSafeValue(node){
+		retval = "";
 		if(node ? node.und : false){
 			retval = node.und[0].safe_value;	
 		}
-		return "";
+		return retval;
+	}
+	function getDescription(desc_arr, lan){
+		retval = "";
+		if(desc_arr ? desc_arr.length > 0 : false){
+			try{
+				retval = desc_arr[lan][0].value;	
+			}catch(e){
+				Ti.API.info("Error getting the description field");
+			}
+		}
+		return retval;
 	}
 	/**
 	 *  public instance method for processing and storing the data returned by the service
@@ -121,6 +133,7 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		    				kategori: obj.field_offer_type[node.language][0].tid,
 		    				title: obj.title_field[node.language][0].safe_value,
 		    				subtitle: obj.field_subtitle[node.language][0].safe_value,
+		    				description: getDescription(obj.field_bem_rk, node.language),	
 		    				from_date: getAndFormatDate(obj.field_show_from),
 		    				to_date: getAndFormatDate(obj.field_show_to),
 		    				latitude: obj.locations[0].latitude,

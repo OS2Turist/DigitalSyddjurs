@@ -1,5 +1,5 @@
 "Window": {
-	backgroundColor:"#fff",
+	backgroundColor:"#EFEEEA",
 	orientationModes: [
 		Titanium.UI.LANDSCAPE_LEFT,
 		Titanium.UI.LANDSCAPE_RIGHT,

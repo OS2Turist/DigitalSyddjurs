@@ -114,7 +114,6 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	 *  public instance method for processing and storing the data returned by the service
 	 */
 	this.processArrangementer = function(json_obj){
-		var listchangedflag = false;
 	    var loc, newevent, image_uri, date_from, date_to, datepart, res;
 	    var arrangementer = Alloy.Collections.instance("Arrangement");
 	    var table = arrangementer.config.adapter.collection_name;
@@ -151,19 +150,16 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	    					imageextension : imageext,
 		    				image: null  // TODO need to figure out how to best load these, maybe loaded and added when first displayed?
 	    				});
-	    				
-	   					var res_arr = arrangementer.where({nid: parseInt(obj.nid), language: node.language});
+						var res_arr = arrangementer.where({nid: parseInt(obj.nid), language: node.language});
 						if(res_arr.length === 0){
 		    				newevent.save();
-		    				arrangementer.add(newevent);
-		    				listchangedflag = true;
+		    				//arrangementer.add(newevent, {silent: true});
 						}else{
 							// Found, update
 							// TODO compare content and only update changed records and set listchangedflag if needed;
-		    				listchangedflag = true;
-							newevent.set({id: res_arr[0].get("id")});
+							newevent.set({id: res_arr[0].get("id")}, {silent: true});
 							newevent.save();
-						}						
+						}
 					});
 	    		}
 	    	}

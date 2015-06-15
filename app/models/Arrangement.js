@@ -63,7 +63,7 @@ exports.definition = {
 			updateDistance: function(position){
 				var model = this;
 				model.set({distance: geolib.getDistance({latitude: parseFloat(model.get("latitude")), longitude: parseFloat(model.get("longitude"))},position)}, {silent: true});
-				model.save();
+				model.save({silent: true});
 			}
 		});
 
@@ -119,7 +119,7 @@ exports.definition = {
 				    db = Ti.Database.open(collection.config.adapter.db_name);
 				    db.execute(sql);
 				    db.close();
-				    collection.trigger('sync');
+				    //collection.trigger('sync');
 				    return true;
 				}else{
 					return false;
@@ -134,7 +134,7 @@ exports.definition = {
 				collection.each(function(model){
 					model.updateDistance(position);
 				});
-				collection.trigger('sync');
+				//collection.trigger('sync');
 				return true;
 			},
 			getEventsWithinRange: function(range){

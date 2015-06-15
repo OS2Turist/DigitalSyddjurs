@@ -19,7 +19,7 @@ function doChangeKm(e){
 	$.lblKmSetting.text = String.format("%d", $.sldKmSetting.value) + " KM";
 	$.win.title = L('hometitle') + " " + String.format("%d", $.sldKmSetting.value) + " KM";
 	if(e){
-		updateGui();		
+		doDataBind();		
 	}
 }
 
@@ -28,21 +28,37 @@ function doClickBubble(e){
 	var detailwin = Alloy.createController("details", args).getView();
 	detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
+var pos_arr = [];
+function getPositionAndSize(distance, id){
+	// have we rendered this one before?
+	var pos = _.find(pos_arr, function(searchpos){ return searchpos.id == id; });
+	//Ti.API.info("pos" + pos);
+	if(!pos){
 
-function getPositionAndSize(distance){
-	size = {};
-	if(distance <= 1000){
-		size = {side: 80, radius: 40};
-	}else if(distance > 1000 && size < 2000){
-		size = {side: 60, radius: 30};
-	}else if(distance > 2000 && size < 4000){
-		size = {side: 40, radius: 20};
-	}else{
-		size = {side: 20, radius: 10};
+		pos = {};
+		pos.id = id;
+		pos.left = getRandomPercentage(10, 70);
+		pos.top = getRandomPercentage(10, 70);
+		//Ti.API.info("new pos generated " + pos);
+
 	}
-	size.left = getRandomPercentage(10, 70);
-	size.top = getRandomPercentage(10, 70);
-	return size;
+	if(distance <= 1000){
+		pos.side = 80;
+		pos.radius = 40;;
+	}else if(distance > 1000 && distance < 2000){
+		pos.side = 60;
+		pos.radius = 30;;
+	}else if(distance > 2000 && distance < 4000){
+		pos.side = 40;
+		pos.radius = 20;;
+	}else{
+		pos.side = 20;
+		pos.radius = 10;;
+	}
+	pos_arr.push(pos);
+	//Ti.API.info("pos returned " + JSON.stringify(pos));
+	
+	return pos;
 }
 
 function rangeFilter(collection){
@@ -51,9 +67,11 @@ function rangeFilter(collection){
 	});
 }
 
+
+
 function transformData(model){
 	var transform = model.toJSON();
-	var size = getPositionAndSize(transform.distance);
+	var size = getPositionAndSize(transform.distance, transform.id);
 	transform.left = size.left;
 	transform.top = size.top;
 	transform.width = size.side;
@@ -62,35 +80,19 @@ function transformData(model){
 	return transform;
 }
 
-function updateGui(){
-	var kat_arr = kategorier.getSelectedArray();
-	//arrangementer.setSortField("distance", "ASC");
-	//arrangementer.sort();
-	arrangementer.fetchWithKategoriFilter(kat_arr);
-}
 
 (function(){
 	
 	// add sync listeners to the model
 	arrangementer.on('sync', function(){
-		//Ti.API.info("Hey the Collection changed! do something");
-		updateGui();
-	});
-	kategorier.on('sync', function(){
-		//Ti.API.info("Hey the Collection changed! do something");
-		updateGui();
+		Ti.API.info("arrangement sync ");
+		//doDataBind();
 	});
 	
 	
 	// pass reference to the required menu view
 	$.settingsmenu.init({parentController: $});
-	//doChangeKm();
-
-
-	updateGui();
 	$.win.title = L('hometitle') + " 4 KM";
-
-
 })();
 
 

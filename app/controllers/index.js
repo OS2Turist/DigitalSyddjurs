@@ -11,6 +11,7 @@ var arrangementer = Alloy.Collections.instance("Arrangement");
 		// Default location if running on simulator  55.487276, 9.471406
 		//var coords = {"latitude": parseFloat("55.487276"), "longitude": parseFloat("9.471406")};
 		Ti.API.info("location change triggered");
+		
 		arrangementer.updateDistanceAndSync(e.coords);
 	});
 	

@@ -20,7 +20,7 @@ var mapview = Alloy.Globals.Map.createView({
 
 function loadAnnotations(){
 	var pins = [];
-	var kat_arr = kategorier.getSelectedArray();
+	var kat_arr = kategorier.getSelectedArray(Ti.Locale.currentLanguage);
 	if(mapview){
 		mapview.removeAllAnnotations();
 		arrangementer.fetchWithKategoriFilter(kat_arr);

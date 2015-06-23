@@ -27,12 +27,12 @@ exports.definition = {
 	},
 	extendCollection: function(Collection) {
 		_.extend(Collection.prototype, {
-			getSelectedArray : function(){
+			getSelectedArray : function(lan){
 				var arr = [];
 				var collection = this;
 			    var dbName = collection.config.adapter.db_name;
 			    var table = collection.config.adapter.collection_name;
-			    var sql = "SELECT * FROM " + table + " WHERE selected = 1 and language = 'da'";
+			    var sql = "SELECT * FROM " + table + " WHERE selected = 1 and language = '"+ lan +"'";
 			    db = Ti.Database.open(dbName);
 			    var rows = db.execute(sql);
 			    while(rows.isValidRow()){

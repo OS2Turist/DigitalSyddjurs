@@ -13,11 +13,16 @@ function doItemclick(e){
 }
 
 function refreshList(){
-	var kat_arr = kategorier.getSelectedArray();
+	var kat_arr = kategorier.getSelectedArray(Ti.Locale.currentLanguage);
 	arrangementer.setSortField("distance", "ASC");
 	arrangementer.sort();
 	arrangementer.fetchWithKategoriFilter(kat_arr);
 }
+
+function languageFilter(collection) {
+	return collection.where({language: Ti.Locale.currentLanguage});
+}
+
 
 function formatDistance(rawdist){
 	if(rawdist > 999){

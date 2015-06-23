@@ -1,5 +1,4 @@
 var Drupal = require('drupal');
-// This Class is responsible for calling the drupal service and fetch the latest data on regular intervals
 
 function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	
@@ -28,30 +27,29 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 
 	/**
 	 * Helper method
-	 * private instance method that filters an image url from the data
+	 * private instance method that filters a thumbnail image url from the data
 	 */	
-	var getImageUri = function(obj){
-		var image_uri = "";
+	var getThumbnailUri = function(obj){
+		var thumb_uri = "";
 		if(obj.images){
 			if(obj.images.length > 0){
-				image_uri = obj.images[0].thumbnail;
+				thumb_uri = obj.images[0].thumbnail;
 			}
 		}
-		return image_uri;
+		return thumb_uri;
 	};
-	
 	/**
 	 * Helper method
-	 * Private instance method that filters the image extension from the the data node
-	 */
-	var getImageExtension = function (url){
-		if(url != ""){
-			var arr1 = url.split('/');
-			var ext = arr1[arr1.length-1].split('?')[0].split('.')[1];
-			return ext;
-		}else{
-			return "";
+	 * private instance method that filters an medium image url from the data
+	 */	
+	var getMediumUri = function(obj){
+		var medium_uri = "";
+		if(obj.images){
+			if(obj.images.length > 0){
+				medium_uri = obj.images[0].medium;
+			}
 		}
+		return medium_uri;
 	};
 
 	/**
@@ -99,7 +97,7 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		}
 		return retval;
 	}
-	function getDescription(desc_arr, lan){
+	function getLocalizedString(desc_arr, lan){
 		retval = "";
 		if(desc_arr ? desc_arr.length > 0 : false){
 			try{
@@ -121,18 +119,19 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	    _.each(json_obj, function(obj){
 	    	if(obj.location){     // import the events that has a location
 	    		if(obj.location.latitude && (obj.location.latitude != "0.000000")){
-	    			var imageuri = getImageUri(obj);
-	    			var imageext = getImageExtension(imageuri);
+	    			var thumbnail_uri = getThumbnailUri(obj);
+	    			var medium_uri = getMediumUri(obj);
 	    			//var imageblob = getPicture(imageuri, obj.nid);  // TODO find the best way to load the images
 					_.each(obj.translations.data, function(node){
+						//Ti.API.info("nid: " + obj.nid + " language: " + node.language + " subtitle " + JSON.stringify(obj.field_subtitle));
 						newevent = Alloy.createModel("Arrangement",{
 							id: null,
 		    				nid: obj.nid,
 		    				language: node.language,
 		    				kategori: obj.field_offer_type[node.language][0].tid,
-		    				title: obj.title_field[node.language][0].safe_value,
-		    				subtitle: obj.field_subtitle[node.language][0].safe_value,
-		    				description: getDescription(obj.field_bem_rk, node.language),	
+		    				title: getLocalizedString(obj.title_field,node.language),
+		    				subtitle: getLocalizedString(obj.field_subtitle,node.language),
+		    				description: getLocalizedString(obj.field_bem_rk, node.language),	
 		    				from_date: getAndFormatDate(obj.field_show_from),
 		    				to_date: getAndFormatDate(obj.field_show_to),
 		    				latitude: obj.locations[0].latitude,
@@ -146,9 +145,9 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		    				email: getUndSafeValue(obj.field_offer_email),
 		    				phone: getUndSafeValue(obj.field_phone),
 		    				distance: 0,
-	    					imageuri: imageuri,
-	    					imageextension : imageext,
-		    				image: null  // TODO need to figure out how to best load these, maybe loaded and added when first displayed?
+	    					image_thumbnail_uri: thumbnail_uri,
+	    					image_medium_uri : medium_uri
+		    				//image: null  // TODO need to figure out how to best load these, maybe loaded and added when first displayed?
 	    				});
 						var res_arr = arrangementer.where({nid: parseInt(obj.nid), language: node.language});
 						if(res_arr.length === 0){

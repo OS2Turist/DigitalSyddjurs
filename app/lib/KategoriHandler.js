@@ -53,7 +53,9 @@ function KategoriHandler(serviceuser, serviceroot, serviceendpoint){
 	    kategorier.fetch();
 		_.each(json_obj, function(obj){
 			_.each(Object.keys(obj.name), function(key){
+				
 				var res_kat = kategorier.where({tid: parseInt(obj.tid), language: key});
+				Ti.API.info("tid: " + obj.tid + " language: " + key + " navn " + obj.name[key][0].safe_value);
 				if(res_kat.length === 0){
 					newkat = Alloy.createModel("Kategori",{
 						tid: obj.tid,

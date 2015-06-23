@@ -19,7 +19,7 @@
 						</View>
 					</ItemTemplate>
 				</Templates>
-				<ListSection dataCollection="Arrangement" dataTransform="formatData">
+				<ListSection dataCollection="Arrangement" dataTransform="formatData" dataFilter="languageFilter">
 					<ListItem itemId="{id}" template="{template}" arrimage:image="{imageuri}" title:text="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
 				</ListSection>
 <!--

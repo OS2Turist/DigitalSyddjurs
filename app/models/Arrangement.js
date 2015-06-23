@@ -23,9 +23,8 @@ exports.definition = {
 		    "email": "text",
 		    "phone": "text", 
 		    "distance" : "integer",
-		    "imageuri": "text",
-		    "imageextension": "text",
-		    "image": "blob"
+		    "image_thumbnail_uri": "text",
+		    "image_medium_uri": "text"
 		},
 		defaults: {
 			nid: 0,
@@ -47,9 +46,8 @@ exports.definition = {
 			email: "",
 			phone: "",
 			distance: 0,
-			imageuri: "",
-			imageextension: "",
-			image: null
+			image_thumbnail_uri: "",
+			image_medium_uri: ""
 		},
 		adapter: {
 			type: "sql",

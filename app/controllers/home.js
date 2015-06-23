@@ -61,6 +61,8 @@ function getPositionAndSize(distance, id){
 	return pos;
 }
 
+
+
 function rangeFilter(collection){
 	return collection.filter(function(mod){
 		return (parseInt(mod.get("distance")) <= ($.sldKmSetting.value * 1000)); 

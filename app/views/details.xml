@@ -6,12 +6,13 @@
 			</LeftNavButton>
 			<View>
 				<View layout="vertical">
-					<View layout="horizontal" height="Ti.UI.SIZE">
-						<ImageView id="image" width="40%" />
+					<View layout="vertical" height="Ti.UI.SIZE">
 						<Label id="title" width="60%" />	
+						<ImageView id="image" width="40%" />
 					</View>
-					<View top="5" height="Ti.UI.SIZE">
+					<View layout="vertical" top="5" height="Ti.UI.SIZE">
 						<Label id="subtitle" />
+						<Label id="description" />
 						<Label id="url" />
 						<Label id="email" />
 						<Label id="phone" />

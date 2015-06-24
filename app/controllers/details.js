@@ -16,8 +16,9 @@ function doClickBack(e){
 (function(){
 	var arr = Alloy.Collections.Arrangement.get(args.modelid);
 	$.title.text = arr.get("title");	
-	$.image.image = arr.get("imageuri");
+	$.image.image = arr.get("image_medium_uri");
 	$.subtitle.text = arr.get("subtitle");
+	$.description.text = arr.get("description");
 	$.street1.text = arr.get("street1");
 	$.street2.text = arr.get("street2");
 	$.postal_code.text = arr.get("postal_code");

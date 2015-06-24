@@ -27,7 +27,7 @@ function loadAnnotations(){
 		arrangementer.each(function(arrangement){
 			var img = Ti.UI.createImageView({
 				id: arrangement.get("id"), 
-				image: arrangement.get("imageuri"),
+				image: arrangement.get("image_thumbnail_uri"),
 				width: 40,
 				height: 40,
 				borderRadius: 20,

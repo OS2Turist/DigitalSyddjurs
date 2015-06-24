@@ -99,7 +99,7 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	}
 	function getLocalizedString(desc_arr, lan){
 		retval = "";
-		if(desc_arr ? desc_arr.length > 0 : false){
+		if(!_.isEmpty(desc_arr)){
 			try{
 				retval = desc_arr[lan][0].value;	
 			}catch(e){
@@ -131,7 +131,7 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		    				kategori: obj.field_offer_type[node.language][0].tid,
 		    				title: getLocalizedString(obj.title_field,node.language),
 		    				subtitle: getLocalizedString(obj.field_subtitle,node.language),
-		    				description: getLocalizedString(obj.field_bem_rk, node.language),	
+		    				description: getLocalizedString(obj.field_offer_you_get, node.language),	
 		    				from_date: getAndFormatDate(obj.field_show_from),
 		    				to_date: getAndFormatDate(obj.field_show_to),
 		    				latitude: obj.locations[0].latitude,
@@ -152,12 +152,14 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 						var res_arr = arrangementer.where({nid: parseInt(obj.nid), language: node.language});
 						if(res_arr.length === 0){
 		    				newevent.save();
+		    				//Ti.API.info("New event: " + obj.nid + "  " + newevent.get("title"));
 		    				//arrangementer.add(newevent, {silent: true});
 						}else{
 							// Found, update
 							// TODO compare content and only update changed records and set listchangedflag if needed;
 							newevent.set({id: res_arr[0].get("id")}, {silent: true});
 							newevent.save();
+		    				//Ti.API.info("Update event: " + obj.nid + "  " + newevent.get("title"));
 						}
 					});
 	    		}

@@ -4,6 +4,7 @@
 			<LeftNavButton platform="ios">
 				<Button title="L(back_button)" onClick="doClickBack" />
 			</LeftNavButton>
+			<ScrollView>
 			<View>
 				<View layout="vertical">
 					<View layout="vertical" height="Ti.UI.SIZE">
@@ -24,6 +25,7 @@
 					</View>					
 				</View>
 			</View>
+			</ScrollView>
 		</Window>
 	</NavigationWindow>
 </Alloy>

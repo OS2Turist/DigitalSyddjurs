@@ -7,12 +7,12 @@
 		<View class="topcontainer" height="Ti.UI.FILL">
 			<ScrollView contentWidth="auto" contentHeight="auto" maxZoomScale="100" minZoomScale="0.1" zoomScale="1">
 				<View id="bubblescontainer" dataCollection="Arrangement" dataFilter="rangeFilter" dataTransform="transformData" dataFunction="doDataBind" height="Ti.UI.FILL" width="Ti.UI.FILL" bottom="15%">
-					<ImageView modelid="{id}" image="{imageuri}" top="{top}" left="{left}" width="{width}" height="{height}" borderRadius="{radius}" onClick="doClickBubble" />	
+					<ImageView modelid="{id}" image="{image_thumbnail_uri}" top="{top}" left="{left}" width="{width}" height="{height}" borderRadius="{radius}" onClick="doClickBubble" />	
 				</View>
 			</ScrollView>
 			<View top="85%" layout="vertical" left="5%" width="90%">
-				<Label id="lblKmSetting" right="0" text="4 KM"/>
-				<Slider id="sldKmSetting" min="1" max="100" width="100%" value="4" onStop="doChangeKm" />
+				<Label id="lblKmSetting" right="0" text="30 KM"/>
+				<Slider id="sldKmSetting" min="1" max="200" width="100%" value="30" onStop="doChangeKm" />
 			</View>
 		</View>
 		<Require id="settingsmenu" src="settingsview" />

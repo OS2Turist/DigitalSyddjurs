@@ -65,10 +65,15 @@ function getPositionAndSize(distance, id){
 
 function rangeFilter(collection){
 	return collection.filter(function(mod){
-		return (parseInt(mod.get("distance")) <= ($.sldKmSetting.value * 1000)); 
+		return ((parseInt(mod.get("distance")) <= ($.sldKmSetting.value * 1000) && mod.get("language") == Ti.Locale.currentLanguage)); 
 	});
 }
 
+function refreshList(){
+	var kat_arr = kategorier.getSelectedArray(Ti.Locale.currentLanguage);
+	arrangementer.fetchWithKategoriFilter(kat_arr);
+	doDataBind();
+}
 
 
 function transformData(model){
@@ -88,13 +93,17 @@ function transformData(model){
 	// add sync listeners to the model
 	arrangementer.on('sync', function(){
 		Ti.API.info("arrangement sync ");
-		//doDataBind();
+		refreshList();
 	});
-	
-	
+
+	kategorier.on('sync', function(){
+		refreshList();
+	});
+
+	refreshList();
 	// pass reference to the required menu view
 	$.settingsmenu.init({parentController: $});
-	$.win.title = L('hometitle') + " 4 KM";
+	$.win.title = L('hometitle') + " 30 KM";
 })();
 
 

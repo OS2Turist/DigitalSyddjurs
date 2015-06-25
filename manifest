@@ -1,8 +1,8 @@
-#appname: DigitalSyddjurs
-#publisher: CB
-#url: http://www.bellcom.dk
-#image: appicon.png
-#appid: dk.bellcom.digitalsyddjurs
-#desc: undefined
-#type: ipad
-#guid: 474c217f-5cc4-40bc-9aaa-626d77263b16
+#appname:DigitalSyddjurs
+#publisher:CB
+#url:http://www.syddjurs.dk
+#image:appicon.png
+#appid:dk.syddjurs.smart
+#desc:undefined
+#type:ipad
+#guid:474c217f-5cc4-40bc-9aaa-626d77263b16

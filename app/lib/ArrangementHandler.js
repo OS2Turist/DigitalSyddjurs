@@ -108,6 +108,13 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		}
 		return retval;
 	}
+	this.updateDistance = function(){
+		Ti.Geolocation.getCurrentPosition(function(e){
+			var arrangementer = Alloy.Collections.instance("Arrangement");
+			arrangementer.updateDistanceAndSync(e.coords);	
+		});
+	};	
+
 	/**
 	 *  public instance method for processing and storing the data returned by the service
 	 */

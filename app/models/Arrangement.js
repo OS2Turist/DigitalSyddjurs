@@ -132,7 +132,7 @@ exports.definition = {
 				collection.each(function(model){
 					model.updateDistance(position);
 				});
-				//collection.trigger('sync');
+				collection.trigger('sync');
 				return true;
 			},
 			getEventsWithinRange: function(range){

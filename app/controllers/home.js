@@ -92,7 +92,6 @@ function transformData(model){
 	
 	// add sync listeners to the model
 	arrangementer.on('sync', function(){
-		Ti.API.info("arrangement sync ");
 		refreshList();
 	});
 

@@ -26,7 +26,6 @@ function addImage(url){
 
 function addLabel(labelbody){
 	if(labelbody ? labelbody != "" : false){
-		Ti.API.info(labelbody);
 		var wlv = Ti.UI.createView({
 			top: 5,
 			layout: "vertical",

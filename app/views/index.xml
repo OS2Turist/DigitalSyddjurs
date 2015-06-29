@@ -1,6 +1,6 @@
 <Alloy>
 	<TabGroup>
-		<Tab icon="/Home.png" iconIsmask="true" title="L('hometab')">
+		<Tab icon="/tabicons/oversigt.png" iconIsmask="true" title="L('hometab')">
 			<Require id="homewin" src="home" />
 		</Tab>		
 		<!--	
@@ -8,10 +8,10 @@
 			<Require id="profilewin" src="profile" />
 		</Tab>
 		-->			
-		<Tab icon="/List.png" iconIsmask="true" title="L('listtab')">
+		<Tab icon="/tabicons/liste.png" iconIsmask="true" title="L('listtab')">
 			<Require id="listwin" src="list" />
 		</Tab>			
-		<Tab icon="/Map.png" iconIsmask="true" title="L('maptab')">
+		<Tab icon="/tabicons/kort.png" iconIsmask="true" title="L('maptab')">
 			<Require id="mapwin" src="map" />
 		</Tab>			
 	</TabGroup>

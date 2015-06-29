@@ -1,10 +1,20 @@
+"NavigationWindow": {
+	backgroundColor: "#fff",
+	tabsTintColor : "#595959"
+},
 "Window": {
-	backgroundColor:"#EFEEEA",
+	backgroundColor:"#e7e2dc",
 	orientationModes: [
 		Titanium.UI.LANDSCAPE_LEFT,
 		Titanium.UI.LANDSCAPE_RIGHT,
 		Titanium.UI.PORTRAIT
 	],
+	tintColor: "#595959",
+	navTintColor: "#595959",
+	    titleAttributes:  {
+        color:'#595959',
+        font: {fontFamily:'HelveticaNeue'}
+    }
 },
 ".topcontainer": {
 	top:20
@@ -12,8 +22,49 @@
 "Label": {
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
-	color: "#000",
-	font: {
-		fontSize: 16
-	}
+	color: "#595959",
+	font: {fontFamily:'HelveticaNeue'}
+},
+".whitelabelview": {
+	top: 5,
+	layout: "vertical",
+	width: "90%",
+	height: Titanium.UI.SIZE,
+	backgroundColor: "#fff",
+	borderRadius: 8,
+	borderWidth: 1,
+	borderColor: "red"
+},
+".whitelabel": {
+	width: "90%",
+	height: Titanium.UI.SIZE,
+	backgroundColor: "#fff",
+	color: "#595959",
+	font: {fontFamily:'HelveticaNeue'}
+},
+"Button": {
+	color: "green",
+	font: {fontFamily:'HelveticaNeue'}
+},
+"TabGroup": {
+	backgroundColor: "#fff",
+	tabsTintColor : "#595959",
+    titleAttributes:  {
+        color:'#595959',
+        font: {fontFamily:'HelveticaNeue'}
+    }
+	
+},
+"Tab": {
+	tintColor: "#595959"
+},
+"ListView": {
+	backgroundColor:"#e7e2dc"
+},
+"TableView": {
+	backgroundColor:"#e7e2dc"
+},
+"TableViewRow": {
+	color: "#595959",
+	font: {fontFamily:'HelveticaNeue'}
 }

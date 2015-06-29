@@ -3,7 +3,7 @@
 	<string name="back_button">Back</string>
 	
 	<!-- Tab group -->
-	<string name="hometab">Home</string>
+	<string name="hometab">Oversigt</string>
 	<string name="profiletab">Profile</string>
 	<string name="listtab">List</string>
 	<string name="maptab">Map</string>
@@ -18,10 +18,10 @@
 	<string name="settings_button">Settings</string>
 	
 	<!-- List screen -->
-	<string name="listtitle">List</string>
+	<string name="listtitle">LIST</string>
 	
 	<!-- Map screen -->
-	<string name="maptitle">Map</string>
+	<string name="maptitle">MAP</string>
 	
 	<!-- Favorites screen -->
 	<string name="favorites_title">Favorites</string>
@@ -33,5 +33,5 @@
 	<string name="history_title">History</string>
 	
 	<!-- Details screen -->
-	<string name="details_title">Details</string>
+	<string name="details_title">DETAILS</string>
 </resources>

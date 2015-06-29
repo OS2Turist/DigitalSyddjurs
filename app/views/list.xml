@@ -2,7 +2,7 @@
 	<Collection src="Arrangement" /> 
 	<Window title="L('listtitle')" id="win">
 		<RightNavButton>
-			<Button id="menubutton" image="Menu.png" />
+			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
 		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">

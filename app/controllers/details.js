@@ -13,18 +13,52 @@ function doClickBack(e){
 		$.win.close();
 	}
 }
+
+
+function addImage(url){
+	if(url ? url != "" : false){
+		var img = Ti.UI.createImageView({
+			image: url, width: "40%", height: Ti.UI.SIZE, borderRadius: 8, borderWidth: 0
+		});	
+		$.maincontainer.add(img);
+	}	
+}
+
+function addLabel(labelbody){
+	if(labelbody ? labelbody != "" : false){
+		Ti.API.info(labelbody);
+		var wlv = Ti.UI.createView({
+			top: 5,
+			layout: "vertical",
+			width: "90%",
+			height: Titanium.UI.SIZE,
+			backgroundColor: "#fff",
+			borderRadius: 8,
+			borderWidth: 0
+		});
+		wlv.add(Ti.UI.createLabel({
+			text: labelbody,
+			width: "90%",
+			height: Titanium.UI.SIZE,
+			backgroundColor: "#fff",
+			color: "#595959",
+			font: {fontFamily:'HelveticaNeue'}
+		}));
+		$.maincontainer.add(wlv);
+	}
+}
+
 (function(){
 	var arr = Alloy.Collections.Arrangement.get(args.modelid);
-	$.title.text = arr.get("title");	
-	$.image.image = arr.get("image_medium_uri");
-	$.subtitle.text = arr.get("subtitle");
-	$.description.text = arr.get("description");
-	$.street1.text = arr.get("street1");
-	$.street2.text = arr.get("street2");
-	$.postal_code.text = arr.get("postal_code");
-	$.city.text = arr.get("city");
-	$.url.text = arr.get("url");
-	$.email.text = arr.get("email");
-	$.phone.text = arr.get("phone");
-
+	
+	addLabel(arr.get("title"));
+	addImage(arr.get("image_medium_uri"));	
+	addLabel(arr.get("subtitle"));
+	addLabel(arr.get("description"));
+	addLabel(arr.get("street1"));
+	addLabel(arr.get("street2"));
+	addLabel(arr.get("postal_code") + " " + arr.get("city"));
+	addLabel(arr.get("url"));
+	addLabel(arr.get("email"));
+	addLabel(arr.get("phone"));
 })();

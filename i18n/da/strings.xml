@@ -18,10 +18,10 @@
 	<string name="settings_button">Indstillinger</string>
 	
 	<!-- List screen -->
-	<string name="listtitle">Liste</string>
+	<string name="listtitle">LISTE</string>
 	
 	<!-- Map screen -->
-	<string name="maptitle">Kort</string>
+	<string name="maptitle">KORT</string>
 	
 	<!-- Favorites screen -->
 	<string name="favorites_title">Favoritter</string>
@@ -33,6 +33,6 @@
 	<string name="history_title">Historik</string>
 
 	<!-- Details screen -->
-	<string name="details_title">Detaljer</string>
+	<string name="details_title">DETALJER</string>
 
 </resources>

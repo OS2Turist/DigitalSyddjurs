@@ -2,6 +2,14 @@ var args = arguments[0] || {};
 var kategorier = Alloy.Collections.instance("Kategori");
 var arrangementer = Alloy.Collections.Arrangement;
 
+function cleanup() {
+	args = null;
+	kategorier = null;
+	arrangementer = null;
+    $.destroy();
+    $.off();
+}
+
 function doItemclick(e){
 	//Ti.API.info("doItemClick " + e.itemId +" " + JSON.stringify(e));
 	//if(e.accessoryClicked){

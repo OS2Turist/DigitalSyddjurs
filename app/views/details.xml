@@ -9,7 +9,7 @@
 				<View id="maincontainer" layout="vertical">
 					<View layout="vertical" height="Ti.UI.SIZE">
 						<Label id="title" width="60%" />	
-						<ImageView id="image" width="40%" />
+						<ImageView id="image" class="detailimg" />
 					</View>
 				</View>
 			</View>

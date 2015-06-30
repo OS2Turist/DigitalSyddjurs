@@ -1,5 +1,5 @@
 <Alloy>
-	<Window title="L('profiletitle')">
+	<Window title="L('profiletitle')" onClose="cleanup">
 		<View width="Ti.UI.FILL" height="Ti.UI.FILL">
 			<Button id="btnFavorites" onClick="doClickFavorites" title="L('favorites_button')" />
 			<Button id="btnHistory" onClick="doClickHistory" title="L('history_button')" />

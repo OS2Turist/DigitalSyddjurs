@@ -1,5 +1,5 @@
 <Alloy>
-	<Window onFocus="doFocus" id="win" title="L('maptitle')">
+	<Window onFocus="doFocus" id="win" onClose="cleanup" title="L('maptitle')">
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>

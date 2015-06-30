@@ -1,5 +1,5 @@
 <Alloy>
-	<TabGroup>
+	<TabGroup onClose="cleanup">
 		<Tab icon="/tabicons/oversigt.png" iconIsmask="true" title="L('hometab')">
 			<Require id="homewin" src="home" />
 		</Tab>		

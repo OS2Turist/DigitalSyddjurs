@@ -3,7 +3,12 @@ var arrangementer = Alloy.Collections.Arrangement;
 var kategorier = Alloy.Collections.instance("Kategori");
 
 function cleanup() {
+	args = null;
+	arrangementer = null;
+	kategorier = null;
+	pos_arr = null;
     $.destroy();
+    $.off();
 }
 
 /**

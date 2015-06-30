@@ -1,5 +1,11 @@
 var args = arguments[0] || {};
 
+function cleanup(){
+	args = null;
+	$.destroy();
+	$.off();
+}
+
 function doClickFavorites(e){
 	Alloy.createController("favorites",{parent: $}).getView().open();
 }

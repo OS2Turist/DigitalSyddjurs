@@ -1,6 +1,6 @@
 <Alloy>
 	<Collection src="Arrangement" /> 
-	<Window title="L('listtitle')" id="win">
+	<Window title="L('listtitle')" id="win" onClose="cleanup">
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>

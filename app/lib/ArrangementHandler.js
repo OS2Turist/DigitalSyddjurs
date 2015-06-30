@@ -109,9 +109,18 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		return retval;
 	}
 	this.updateDistance = function(){
+		
 		Ti.Geolocation.getCurrentPosition(function(e){
-			var arrangementer = Alloy.Collections.instance("Arrangement");
-			arrangementer.updateDistanceAndSync(e.coords);	
+			var c = e.coords;
+			if(!c && Ti.Geolocation.lastGeolocation){
+				c = JSON.parse(Ti.Geolocation.lastGeolocation);
+			}
+			if(c){
+				var arrangementer = Alloy.Collections.instance("Arrangement");
+				arrangementer.updateDistanceAndSync(c);	
+			}else{
+				Ti.API.info("NO LOCATION AVAILABLE - updateDistance");
+			}
 		});
 	};	
 

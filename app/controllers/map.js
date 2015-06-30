@@ -6,6 +6,18 @@ var firstfocus = true;
 // Centreret på djursland
 var defaultlocation = {latitude:56.369152, longitude:10.583272,latitudeDelta:0.7, longitudeDelta:0.7};
 
+function cleanup() {
+	args = null;
+	kategorier = null;
+	arrangementer = null;
+	firstfocus = null;
+	defaultlocation = null;
+    $.destroy();
+    $.off();
+}
+
+
+
 var mapview = Alloy.Globals.Map.createView({
 	id: "mapview",
 	zIndex: -1,

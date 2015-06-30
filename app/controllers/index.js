@@ -19,8 +19,8 @@ function startTracker(){
 	Titanium.Geolocation.setDistanceFilter(20);
 	Ti.Geolocation.addEventListener("location", function(e){
 		var c = e.coords;
-		if(!c){
-			c = JSON.parse(Ti.Geolocation.getLastGeolocation());
+		if(!c && Ti.Geolocation.lastGeolocation){
+			c = JSON.parse(Ti.Geolocation.lastGeolocation);
 		}
 		if(c){
 			// not faster than 1 location change every 10 seconds

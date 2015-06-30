@@ -2,11 +2,11 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>dk.syddjurs.smart</id>
     <name>DigitalSyddjurs</name>
-    <version>0.8</version>
-    <publisher>CB</publisher>
+    <version>0.8.1</version>
+    <publisher>Bellcom</publisher>
     <url>http://www.syddjurs.dk</url>
-    <description>undefined</description>
-    <copyright>2015 by CB</copyright>
+    <description>Developed for Bellcom by Claus Stilborg</description>
+    <copyright>2015 by Bellcom</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>

@@ -5,7 +5,8 @@
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
 		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
-			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
+			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick" onPullend="doPullend">
+				<SearchBar />
 				<Templates>
 					<ItemTemplate name="template">
 						<View layout="horizontal" left="2" right="2" top="1" bottom="1" height="Ti.UI.SIZE" width="Ti.UI.FILL" bindId="rowView">
@@ -20,15 +21,13 @@
 					</ItemTemplate>
 				</Templates>
 				<ListSection dataCollection="Arrangement" dataTransform="formatData" dataFilter="languageFilter">
-					<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
+					<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" searchableText="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
 				</ListSection>
-<!--
 				<PullView>
-					<View>
-						<Label>Hjælpe tekst her, eller 'release to update'?</Label>
+					<View class="pullme">
+						<Label text="L('ReleaseToUpdate')" />
 					</View>
 				</PullView>
--->				
 			</ListView>		
 		</ScrollView>
 		<Require id="settingsmenu" src="settingsview" />

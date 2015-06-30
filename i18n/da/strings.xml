@@ -19,6 +19,7 @@
 	
 	<!-- List screen -->
 	<string name="listtitle">LISTE</string>
+	<string name="releasetoupdate">Giv slip for at opdatere..</string>
 	
 	<!-- Map screen -->
 	<string name="maptitle">KORT</string>

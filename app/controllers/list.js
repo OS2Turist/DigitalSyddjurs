@@ -9,7 +9,9 @@ function cleanup() {
     $.destroy();
     $.off();
 }
-
+function doPullend(e){
+	Ti.API.info("Pullend");
+}
 function doItemclick(e){
 	//Ti.API.info("doItemClick " + e.itemId +" " + JSON.stringify(e));
 	//if(e.accessoryClicked){

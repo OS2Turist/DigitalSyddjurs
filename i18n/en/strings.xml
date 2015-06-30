@@ -19,6 +19,7 @@
 	
 	<!-- List screen -->
 	<string name="listtitle">LIST</string>
+	<string name="releasetoupdate">Release To Update..</string>
 	
 	<!-- Map screen -->
 	<string name="maptitle">MAP</string>

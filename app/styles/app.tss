@@ -71,4 +71,10 @@
 "TableViewRow": {
 	color: "#595959",
 	font: {fontFamily:'HelveticaNeue'}
+},
+"SearchBar": {
+	 barColor:"#e7e2dc"
+},
+".pullme": {
+	backgroundColor:"#e7e2dc"
 }

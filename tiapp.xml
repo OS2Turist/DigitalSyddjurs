@@ -3,8 +3,8 @@
     <id>dk.syddjurs.smart</id>
     <name>DigitalSyddjurs</name>
     <version>0.8.1</version>
-    <publisher>Bellcom</publisher>
-    <url>http://www.syddjurs.dk</url>
+    <publisher>Appsolution</publisher>
+    <url>http://www.appsolution.dk</url>
     <description>Developed for Bellcom by Claus Stilborg</description>
     <copyright>2015 by Bellcom</copyright>
     <icon>appicon.png</icon>
@@ -57,7 +57,7 @@
         <target device="iphone">true</target>
         <target device="mobileweb">false</target>
     </deployment-targets>
-    <sdk-version>4.0.0.RC5</sdk-version>
+    <sdk-version>4.1.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

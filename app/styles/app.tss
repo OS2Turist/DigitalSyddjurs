@@ -35,10 +35,6 @@
 	borderWidth: 1,
 	borderColor: "red"
 },
-".detailimg": {
-	width: "60%",
-	top: 5
-},
 ".whitelabel": {
 	width: "90%",
 	height: Titanium.UI.SIZE,

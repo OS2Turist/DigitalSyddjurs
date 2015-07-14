@@ -35,4 +35,10 @@
 	
 	<!-- Details screen -->
 	<string name="details_title">DETAILS</string>
+	<string name="phone">Phone </string>
+	<string name="findroute">Map route</string>
+	<string name="addtofavourites">Add to favourites</string>
+	<string name="removefromfavourites">Remove from favourites</string>
+
+	
 </resources>

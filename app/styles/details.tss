@@ -1,4 +1,43 @@
-
-".container" : {
-  
+/*
+ Farvekoderne er: 
+Mørk grå: #595959
+Lys grå: #9b9899
+Turkis: #27b4b3
+ * */
+"#title" : {
+	color: "#27b4b3",
+	font: {fontFamily:'HelveticaNeue', fontSize: 22}  
+},
+"#adresse" : {
+	color: "#27b4b3",
+	font: {fontFamily:'HelveticaNeue', fontSize: 18}  
+},
+".buttongreen": {
+	color: "#fff",
+	backgroundColor: "#27b4b3",
+	width: "100%",
+	height: "32",
+	font: {fontFamily:'HelveticaNeue', fontSize: 18}  
+	
+},
+".buttonlightgrey": {
+	color: "#fff",
+	backgroundColor: "#9b9899",
+	width: "100%",
+	height: "32",
+	font: {fontFamily:'HelveticaNeue', fontSize: 18}  
+	
+},
+".phonebutton": {
+	color: "#fff",
+	backgroundColor: "#595959",
+	height: "32",
+	font: {fontFamily:'HelveticaNeue', fontSize: 18}
+},
+".actionbutton": {
+	color: "#fff",
+	backgroundColor: "#27b4b3",
+	height: "32",
+	font: {fontFamily:'HelveticaNeue', fontSize: 18}  
+	
 }

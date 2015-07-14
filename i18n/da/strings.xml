@@ -35,5 +35,9 @@
 
 	<!-- Details screen -->
 	<string name="details_title">DETALJER</string>
+	<string name="phone">Tlf </string>
+	<string name="findroute">Find rute</string>
+	<string name="addtofavourites">Føj til favoritter</string>
+	<string name="removefromfavourites">Fjern fra favoritter</string>
 
 </resources>

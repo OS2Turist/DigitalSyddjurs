@@ -7,6 +7,7 @@ exports.definition = {
 		    "nid": "integer",
 		    "language": "text",
 		    "kategori": "integer",
+		    "favorit": "integer",
 		    "title": "text",
 		    "subtitle": "text",
 		    "description": "text",
@@ -30,6 +31,7 @@ exports.definition = {
 			nid: 0,
 			language: "",
 			kategori: 0,
+			favorit: 0,
 			title: "",
 			subtitle: "",
 			description: "",
@@ -62,6 +64,18 @@ exports.definition = {
 				var model = this;
 				model.set({distance: geolib.getDistance({latitude: parseFloat(model.get("latitude")), longitude: parseFloat(model.get("longitude"))},position)}, {silent: true});
 				model.save({silent: true});
+			},
+			setFavourite: function(){
+				var model = this;
+				model.set({favorit: 1}, {silent: true});
+				model.save({silent: true});
+				return model;
+			},
+			removeFavourite: function(){
+				var model = this;
+				model.set({favorit: 0}, {silent: true});
+				model.save({silent: true});
+				return model;
 			}
 		});
 
@@ -103,6 +117,10 @@ exports.definition = {
                     }
                     return left.index < right.index ? -1 : 1;
                 }), 'value');
+            },
+            fetchFavourites: function(){
+				var table = this.config.adapter.collection_name;
+				return this.fetch({query:'SELECT * from ' + table + ' where favorit = 1'});
             },
 			fetchWithKategoriFilter : function(kat_arr){
 				var table = this.config.adapter.collection_name;

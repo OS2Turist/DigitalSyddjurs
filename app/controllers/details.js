@@ -22,16 +22,21 @@ function doToggleFavourite(e){
 	}else{
 		arr = arr.removeFavourite();
 	}
-	if(arr.get("favorit") == 0){
-		$.favourite.title = L("addtofavourites");
-	}else{
-		$.favourite.title = L("removefromfavourites");
-	}
+	setFavText(arr.get("favorit"));
 }
 
 function doDialUp(e){
 	//Ti.API.info($.phone.phonenumber);
 	Titanium.Platform.openURL("tel:" + $.phone.phonenumber);
+}
+
+function setFavText(val){
+	if(val == 0){
+		$.favourite.title = L("addtofavourites");
+	}else{
+		$.favourite.title = L("removefromfavourites");
+	}
+
 }
 
 (function(){
@@ -43,9 +48,5 @@ function doDialUp(e){
 	$.mainImage.image = arr.get("image_medium_uri");
 	$.phone.title = L("phone") + arr.get("phone");
 	$.phone.phonenumber = arr.get("phone");
-	if(arr.get("favorit") == 0){
-		$.favourite.title = L("addtofavourites");
-	}else{
-		$.favourite.title = L("removefromfavourites");
-	}
+	setFavText(arr.get("favorit"));
 })();

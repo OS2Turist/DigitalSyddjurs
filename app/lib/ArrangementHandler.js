@@ -145,6 +145,7 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		    				nid: obj.nid,
 		    				language: node.language,
 		    				kategori: obj.field_offer_type[node.language][0].tid,
+		    				favorit: 0,
 		    				title: getLocalizedString(obj.title_field,node.language),
 		    				subtitle: getLocalizedString(obj.field_subtitle,node.language),
 		    				description: getLocalizedString(obj.field_offer_you_get, node.language),	
@@ -173,7 +174,7 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 						}else{
 							// Found, update
 							// TODO compare content and only update changed records and set listchangedflag if needed;
-							newevent.set({id: res_arr[0].get("id")}, {silent: true});
+							newevent.set({id: res_arr[0].get("id"), favorit: res_arr[0].get("favorit")} , {silent: true});
 							newevent.save();
 		    				//Ti.API.info("Update event: " + obj.nid + "  " + newevent.get("title"));
 						}

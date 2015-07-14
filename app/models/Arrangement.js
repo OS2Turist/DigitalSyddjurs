@@ -67,14 +67,14 @@ exports.definition = {
 			},
 			setFavourite: function(){
 				var model = this;
-				model.set({favorit: 1}, {silent: true});
-				model.save({silent: true});
+				model.set({favorit: 1});
+				model.save();
 				return model;
 			},
 			removeFavourite: function(){
 				var model = this;
-				model.set({favorit: 0}, {silent: true});
-				model.save({silent: true});
+				model.set({favorit: 0});
+				model.save();
 				return model;
 			}
 		});

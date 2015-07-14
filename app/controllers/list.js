@@ -13,13 +13,7 @@ function doPullend(e){
 	Ti.API.info("Pullend");
 }
 function doItemclick(e){
-	//Ti.API.info("doItemClick " + e.itemId +" " + JSON.stringify(e));
-	//if(e.accessoryClicked){
-		// Show the detail window and using $model to pass data
-		var args = {"modelid": e.itemId};
-		var detailwin = Alloy.createController("details", args).getView();
-		detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});	
-	//}		
+	Alloy.createController("details", {"modelid": e.itemId}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
 
 function refreshList(){

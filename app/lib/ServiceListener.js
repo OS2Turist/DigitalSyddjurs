@@ -17,7 +17,7 @@ function ServiceListener(){
 		kh.loadKategorier(kh.processKategorier);	
 		ah.loadArrangementer(ah.processArrangementer);
 		
-	}, 30000);
+	}, 300000);
 	kh.loadKategorier(kh.processKategorier);	
 	ah.loadArrangementer(ah.processArrangementer);
 	ah.updateDistance();

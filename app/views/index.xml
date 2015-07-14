@@ -3,11 +3,9 @@
 		<Tab icon="/tabicons/oversigt.png" iconIsmask="true" title="L('hometab')">
 			<Require id="homewin" src="home" />
 		</Tab>		
-		<!--	
-		<Tab icon="/Settings.png" iconIsmask="true" title="L('profiletab')">
-			<Require id="profilewin" src="profile" />
+		<Tab icon="/tabicons/star.png" iconIsmask="true" title="L('favouritestab')">
+			<Require id="favouriteswin" src="favourites" />
 		</Tab>
-		-->			
 		<Tab icon="/tabicons/liste.png" iconIsmask="true" title="L('listtab')">
 			<Require id="listwin" src="list" />
 		</Tab>			

@@ -5,6 +5,7 @@
 	<!-- Tab group -->
 	<string name="hometab">Oversigt</string>
 	<string name="profiletab">Profil</string>
+	<string name="favouritestab">Favoritter</string>
 	<string name="listtab">Liste</string>
 	<string name="maptab">Kort</string>
 	

@@ -16,6 +16,10 @@ function doClickBack(e){
 	}
 }
 
+function doLinkFB(e){
+	Ti.Platform.openURL("https://www.facebook.com");
+}
+
 function doToggleFavourite(e){
 	if(arr.get("favorit") == 0){
 		arr = arr.setFavourite();

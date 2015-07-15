@@ -1,11 +1,8 @@
 var args = arguments[0] || {};
-var arrangementer = Alloy.Collections.Arrangement;
-var kategorier = Alloy.Collections.instance("Kategori");
+var masterarr = [];
 
 function cleanup() {
 	args = null;
-	arrangementer = null;
-	kategorier = null;
 	pos_arr = null;
     $.destroy();
     $.off();
@@ -24,7 +21,7 @@ function doChangeKm(e){
 	$.lblKmSetting.text = String.format("%d", $.sldKmSetting.value) + " KM";
 	$.win.title = L('hometitle') + " " + String.format("%d", $.sldKmSetting.value) + " KM";
 	if(e){
-		doDataBind();		
+		Alloy.Globals.geofacade.setTriggerRange(parseInt(e.value * 1000));
 	}
 }
 
@@ -36,7 +33,7 @@ function doClickBubble(e){
 var pos_arr = [];
 function getPositionAndSize(distance, id){
 	// have we rendered this one before?
-	var pos = _.find(pos_arr, function(searchpos){ return searchpos.id == id; });
+	var pos = _.find($.bubblescontainer.children, function(searchpos){ return searchpos.modelid == id; });
 	//Ti.API.info("pos" + pos);
 	if(!pos){
 
@@ -48,19 +45,19 @@ function getPositionAndSize(distance, id){
 
 	}
 	if(distance <= 1000){
-		pos.side = 80;
-		pos.radius = 40;;
+		pos.side = 100;
+		pos.radius = 50;
 	}else if(distance > 1000 && distance < 2000){
-		pos.side = 60;
-		pos.radius = 30;;
+		pos.side = 80;
+		pos.radius = 40;
 	}else if(distance > 2000 && distance < 4000){
-		pos.side = 40;
-		pos.radius = 20;;
+		pos.side = 60;
+		pos.radius = 30;
 	}else{
-		pos.side = 20;
-		pos.radius = 10;;
+		pos.side = 40;
+		pos.radius = 20;
 	}
-	pos_arr.push(pos);
+	
 	//Ti.API.info("pos returned " + JSON.stringify(pos));
 	
 	return pos;
@@ -68,19 +65,33 @@ function getPositionAndSize(distance, id){
 
 
 
-function rangeFilter(collection){
-	return collection.filter(function(mod){
-		return ((parseInt(mod.get("distance")) <= ($.sldKmSetting.value * 1000) && mod.get("language") == Ti.Locale.currentLanguage)); 
+$.updateHome = function(arr){
+	masterarr = arr;
+	refreshUI();	
+};
+function refreshUI(){
+	//<ImageView modelid="{id}" image="{image_thumbnail_uri}" top="{top}" left="{left}" width="{width}" height="{height}" borderRadius="{radius}" onClick="doClickBubble" />
+	// first account for range
+	
+	_.each(masterarr, function(point){
+		var elem = _.find($.bubblescontainer.children, function(bill){ return bill.modelid == point.payload.id; });
+		if(point.withinrange){
+			var place = getPositionAndSize(point.distance, point.payload.id);
+			if(elem){
+				elem.applyProperties({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius, onClick: "doClickBubble"});				
+			}else{
+				var bub = Ti.UI.createImageView({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius, onClick: "doClickBubble"});
+				$.bubblescontainer.add(bub);
+			}
+		}else{
+			if(elem){
+				$.bubblescontainer.remove(elem);
+			}
+		}
 	});
 }
 
-function refreshList(){
-	var kat_arr = kategorier.getSelectedArray(Ti.Locale.currentLanguage);
-	arrangementer.fetchWithKategoriFilter(kat_arr);
-	doDataBind();
-}
-
-
+/*
 function transformData(model){
 	var transform = model.toJSON();
 	var size = getPositionAndSize(transform.distance, transform.id);
@@ -92,19 +103,11 @@ function transformData(model){
 	return transform;
 }
 
-
+*/
 (function(){
 	
-	// add sync listeners to the model
-	arrangementer.on('sync', function(){
-		refreshList();
-	});
 
-	kategorier.on('sync', function(){
-		refreshList();
-	});
-
-	refreshList();
+	refreshUI();
 	// pass reference to the required menu view
 	$.settingsmenu.init({parentController: $});
 	$.win.title = L('hometitle') + " 30 KM";

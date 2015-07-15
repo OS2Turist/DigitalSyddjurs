@@ -1,11 +1,10 @@
 <Alloy>
-	<Collection src="Arrangement" /> 
 	<Window title="L('listtitle')" id="win" onClose="cleanup">
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
 		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
-			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick" onPullend="doPullend">
+			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
 				<SearchBar />
 				<Templates>
 					<ItemTemplate name="template">
@@ -20,14 +19,12 @@
 						</View>
 					</ItemTemplate>
 				</Templates>
+				<!--
 				<ListSection dataCollection="Arrangement" dataTransform="formatData" dataFilter="languageFilter">
 					<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" searchableText="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
 				</ListSection>
-				<PullView>
-					<View class="pullme">
-						<Label text="L('ReleaseToUpdate')" />
-					</View>
-				</PullView>
+				-->
+				<ListSection/>
 			</ListView>		
 		</ScrollView>
 		<Require id="settingsmenu" src="settingsview" />

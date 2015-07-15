@@ -2,6 +2,8 @@ var Drupal = require('drupal');
 
 function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	
+	var _this = this;
+	
 	var _user = serviceuser;
 	
 	var _serviceroot = serviceroot;
@@ -108,26 +110,16 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		}
 		return retval;
 	}
-	this.updateDistance = function(){
-		
-		Ti.Geolocation.getCurrentPosition(function(e){
-			var c = e.coords;
-			if(!c && Ti.Geolocation.lastGeolocation){
-				c = JSON.parse(Ti.Geolocation.lastGeolocation);
-			}
-			if(c){
-				var arrangementer = Alloy.Collections.instance("Arrangement");
-				arrangementer.updateDistanceAndSync(c);	
-			}else{
-				Ti.API.info("NO LOCATION AVAILABLE - updateDistance");
-			}
-		});
-	};	
+	
+	this.getArrangementerAsArray = function(callback){
+		callback(Alloy.Collections.instance("Arrangement").getLangaugeSpecificArray());
+		return true;
+	};
 
 	/**
 	 *  public instance method for processing and storing the data returned by the service
 	 */
-	this.processArrangementer = function(json_obj){
+	this.processArrangementer = function(json_obj, callback){
 	    var loc, newevent, image_uri, date_from, date_to, datepart, res;
 	    var arrangementer = Alloy.Collections.instance("Arrangement");
 	    var table = arrangementer.config.adapter.collection_name;
@@ -161,7 +153,6 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 		    				url: getUrl(obj.field_offer_url),
 		    				email: getUndSafeValue(obj.field_offer_email),
 		    				phone: getUndSafeValue(obj.field_phone),
-		    				distance: 0,
 	    					image_thumbnail_uri: thumbnail_uri,
 	    					image_medium_uri : medium_uri
 		    				//image: null  // TODO need to figure out how to best load these, maybe loaded and added when first displayed?
@@ -188,6 +179,8 @@ function ArrangementHandler(serviceuser, serviceroot, serviceendpoint){
 	    	// grap the timestamp from info and clean up using the nid list
 	    	Ti.App.Properties.setString("latestBackendTimestamp", json_obj.info.timestamp);
 	    }
+	    // return the language specific array through the callback
+	    _this.getArrangementerAsArray(callback);
 	};
 	
 	/**

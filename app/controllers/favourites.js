@@ -15,5 +15,5 @@ function doItemclick(e){
 }
 
 (function(){
-	$.favourite_events.fetch();
+	Alloy.Collections.Arrangement.fetch();
 })();

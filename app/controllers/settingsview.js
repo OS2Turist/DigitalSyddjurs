@@ -62,6 +62,6 @@ function languageFilter(collection) {
 }
 
 (function(){
-	Alloy.Collections.Kategori.fetch();
+	
 	
 })();

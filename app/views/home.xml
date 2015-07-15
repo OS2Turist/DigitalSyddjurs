@@ -1,14 +1,11 @@
 <Alloy>
-	<Collection src="Arrangement" />
 	<Window id="win" title="L('hometitle')" onClose="cleanup">
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
 		<View class="topcontainer" height="Ti.UI.FILL">
 			<ScrollView contentWidth="auto" contentHeight="auto" maxZoomScale="100" minZoomScale="0.1" zoomScale="1">
-				<View id="bubblescontainer" dataCollection="Arrangement" dataFilter="rangeFilter" dataTransform="transformData" dataFunction="doDataBind" height="Ti.UI.FILL" width="Ti.UI.FILL" bottom="15%">
-					<ImageView modelid="{id}" image="{image_thumbnail_uri}" top="{top}" left="{left}" width="{width}" height="{height}" borderRadius="{radius}" onClick="doClickBubble" />	
-				</View>
+				<View id="bubblescontainer" height="Ti.UI.FILL" width="Ti.UI.FILL" bottom="15%" />
 			</ScrollView>
 			<View top="85%" layout="vertical" left="5%" width="90%">
 				<Label id="lblKmSetting" right="0" text="30 KM"/>

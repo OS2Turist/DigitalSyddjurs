@@ -1,6 +1,4 @@
 var args = arguments[0] || {};
-var arrangementer = Alloy.Collections.instance("Arrangement");
-var kategorier = Alloy.Collections.instance("Kategori");
 
 var firstfocus = true;
 // Centreret på djursland
@@ -30,30 +28,26 @@ var mapview = Alloy.Globals.Map.createView({
     height: Ti.UI.FILL
 });
 
-function loadAnnotations(){
+$.updateAnnotations = function(arr){
 	var pins = [];
-	var kat_arr = kategorier.getSelectedArray(Ti.Locale.currentLanguage);
 	if(mapview){
 		mapview.removeAllAnnotations();
-		arrangementer.fetchWithKategoriFilter(kat_arr);
-		arrangementer.each(function(arrangement){
+		_.each(arr,function(point){
 			var img = Ti.UI.createImageView({
-				id: arrangement.get("id"), 
-				image: arrangement.get("image_thumbnail_uri"),
+				id: point.payload.id, 
+				image: point.payload.image_thumbnail_uri,
 				width: 40,
 				height: 40,
 				borderRadius: 20,
 			});
 			img.addEventListener('click', function(e){
-					var args = {"modelid": e.source.id};
-					var detailwin = Alloy.createController("details", args).getView();
-					detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});	
+					Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 			});
 			var pin = Alloy.Globals.Map.createAnnotation({
-				titleid: arrangement.get("id"),
-			    latitude: arrangement.get("latitude"),
-			    longitude: arrangement.get("longitude"),
-			    title: arrangement.get("title"),
+				titleid: point.payload.id,
+			    latitude: point.payload.latitude,
+			    longitude: point.payload.longitude,
+			    title: point.payload.title,
 			    rightView: img,
 			    animate: true,
 			    draggable:false
@@ -62,7 +56,7 @@ function loadAnnotations(){
 		});
 		mapview.addAnnotations(pins);
 	}
-}
+};
 
 // Center on device
 function centerOnMe(){
@@ -99,13 +93,4 @@ function doFocus(e){
 	centerButton.addEventListener("click", centerOnMe);
 	mapview.add(centerButton);
 	
-	kategorier.on('sync', function(){
-		loadAnnotations();
-	});
-	
-	arrangementer.on('sync', function(){
-		loadAnnotations();
-	});
-
-	loadAnnotations();
 })();

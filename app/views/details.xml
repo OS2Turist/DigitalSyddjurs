@@ -12,7 +12,7 @@
 							<Label id="adresse" left="0">Strandvejen 8, 8400 Ebeltoft</Label>
 						</View>
 						<View width="Ti.UI.SIZE" right="0" height="Ti.UI.SIZE">
-							<ImageView image="/fb_button.png" width="64" />
+							<ImageView image="/fb_button.png" width="64" onClick="doLinkFB" />
 						</View>
 					</View>
 					<View height="Ti.UI.SIZE" top="12" width="96%">

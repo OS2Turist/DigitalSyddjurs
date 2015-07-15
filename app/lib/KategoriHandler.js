@@ -80,6 +80,14 @@ function KategoriHandler(serviceuser, serviceroot, serviceendpoint){
 			});
 		});
 	};
+	
+	this.getKategorierAsArray = function(callback){
+		Alloy.Collections.instance("Kategori").getKategorier(function(kat_arr){
+			callback(kat_arr);
+		});
+		return true;
+	};
+
 }
 
 module.exports = KategoriHandler;

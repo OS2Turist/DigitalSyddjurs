@@ -23,7 +23,6 @@ exports.definition = {
 		    "url": "text",
 		    "email": "text",
 		    "phone": "text", 
-		    "distance" : "integer",
 		    "image_thumbnail_uri": "text",
 		    "image_medium_uri": "text"
 		},
@@ -47,7 +46,6 @@ exports.definition = {
 			url: "",
 			email: "",
 			phone: "",
-			distance: 0,
 			image_thumbnail_uri: "",
 			image_medium_uri: ""
 		},
@@ -60,11 +58,6 @@ exports.definition = {
 	extendModel: function(Model) {
 		_.extend(Model.prototype, {
 			// extended functions and properties go here
-			updateDistance: function(position){
-				var model = this;
-				model.set({distance: geolib.getDistance({latitude: parseFloat(model.get("latitude")), longitude: parseFloat(model.get("longitude"))},position)}, {silent: true});
-				model.save({silent: true});
-			},
 			setFavourite: function(){
 				var model = this;
 				model.set({favorit: 1});
@@ -122,6 +115,29 @@ exports.definition = {
 				var table = this.config.adapter.collection_name;
 				return this.fetch({query:'SELECT * from ' + table + ' where favorit = 1'});
             },
+   			getLangaugeSpecificArray : function(){
+
+				var arr = [];
+				var count = 0;
+				var collection = this;
+			    var dbName = collection.config.adapter.db_name;
+			    var table = collection.config.adapter.collection_name;
+			    var sql = "SELECT * FROM " + table + " WHERE language = '"+ Ti.Locale.currentLanguage +"'";
+			    db = Ti.Database.open(dbName);
+			    var rows = db.execute(sql);
+			    while(rows.isValidRow()){
+		    	    arr[count] = {};
+				    for (var i=0, len=rows.fieldCount; i<len; i++){
+				        arr[count][rows.fieldName(i)] = rows.field(i);
+				    }
+			    	count++;
+			    	rows.next();
+			    }
+   			    rows.close();
+   			    db.close();
+
+				return arr;
+			},
 			fetchWithKategoriFilter : function(kat_arr){
 				var table = this.config.adapter.collection_name;
 				return this.fetch({query:'SELECT * from ' + table + ' where kategori IN (' + kat_arr.join(",") + ') AND language="' + Ti.Locale.currentLanguage + '"'});
@@ -140,24 +156,6 @@ exports.definition = {
 				}else{
 					return false;
 				}
-			},
-			/**
-			 * Loop through the records and recalculate the distance to the current position of the device, end with calling sync to update databinding  
- 			 * @param {Object} position
-			 */
-			updateDistanceAndSync: function(position){
-				var collection = this;
-				collection.each(function(model){
-					model.updateDistance(position);
-				});
-				collection.trigger('sync');
-				return true;
-			},
-			getEventsWithinRange: function(range){
-				var arr = this.models.filter(function(model) {
-				    return (model.get('distance') <= range);
-				 });
-				 return arr;
 			}
 		});
 		return Collection;

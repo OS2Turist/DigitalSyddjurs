@@ -2,15 +2,15 @@
 	<TabGroup onClose="cleanup">
 		<Tab icon="/tabicons/oversigt.png" iconIsmask="true" title="L('hometab')">
 			<Require id="homewin" src="home" />
-		</Tab>		
+		</Tab>
 		<Tab icon="/tabicons/star.png" iconIsmask="true" title="L('favouritestab')">
 			<Require id="favouriteswin" src="favourites" />
 		</Tab>
 		<Tab icon="/tabicons/liste.png" iconIsmask="true" title="L('listtab')">
 			<Require id="listwin" src="list" />
-		</Tab>			
+		</Tab>
 		<Tab icon="/tabicons/kort.png" iconIsmask="true" title="L('maptab')">
 			<Require id="mapwin" src="map" />
-		</Tab>			
+		</Tab>
 	</TabGroup>
 </Alloy>

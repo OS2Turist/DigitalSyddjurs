@@ -1,65 +1,38 @@
 var servicelistener = require("ServiceListener");
-var arrangementer = Alloy.Collections.instance("Arrangement");
-var trackerrunning = false;
-var lastsync = 0;
+var masterarr = [];
 
 function cleanup() {
 	servicelistener = null;
-	arrangementer = null;
-	trackerrunning = null;
-	lastsync = null;
+	Ti.App.removeEventListener("geofacade:location", updateArrangementer);
     $.destroy();
     $.off();
 }
 
-
-function startTracker(){
-	// Set up the GPS tracking
-	trackerrunning = true;
-	Titanium.Geolocation.setDistanceFilter(20);
-	Ti.Geolocation.addEventListener("location", function(e){
-		var c = e.coords;
-		if(!c && Ti.Geolocation.lastGeolocation){
-			c = JSON.parse(Ti.Geolocation.lastGeolocation);
-		}
-		if(c){
-			// not faster than 1 location change every 10 seconds
-			var timestamp = Math.floor(Date.now() / 1000);
-			if((lastsync === 0) || ((timestamp - lastsync) > 10)){
-				Ti.API.info("Loc: " + JSON.stringify(c));
-				lastsync = timestamp;
-				arrangementer.updateDistanceAndSync(c);
-			}
-		}else{
-			Ti.API.info("NO LOCATION AVAILABLE - startTracker");
-			// Distance is not updated
-		}
-	});
+function updateArrangementer(e){
+	//
+	masterarr = e.trackpoints;
+	updateList();
 }
 
+function updateList(){
+	var selected = Alloy.Collections.instance("Kategori").getSelectedArray();
+	//Ti.API.info(JSON.stringify(selected));
+	var arr = _.filter(masterarr, function(point){
+		return _.contains(selected, point.payload.kategori);
+	});
+	//Ti.API.info(JSON.stringify(arr));
+	$.listwin.updateList(arr);
+	$.mapwin.updateAnnotations(arr);
+	$.homewin.updateHome(arr);
+}
 
 (function(){
+	Ti.App.addEventListener("geofacade:location", updateArrangementer);
 	var sl = new servicelistener();
-	if(Ti.Geolocation.getLocationServicesEnabled){
-		if(!trackerrunning){
-			startTracker();
-		}
-	}
-	
-	Ti.Geolocation.addEventListener("authorization", function (e){
-		if(e.authorizationStatus > 2){
-			// Authorized	
-			if(!trackerrunning){
-				startTracker();
-			}
-		}else{
-			// Denied
-			Ti.Geolocation.removeEventListener("location");
-			trackerrunning = false;
-		}
-	});
-	
-	
-	
 	$.index.open();
+	
+	Alloy.Collections.instance("Kategori").on('sync', function(){
+		updateList();
+	});
+
 })();

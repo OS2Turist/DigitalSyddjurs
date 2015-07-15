@@ -27,12 +27,34 @@ exports.definition = {
 	},
 	extendCollection: function(Collection) {
 		_.extend(Collection.prototype, {
-			getSelectedArray : function(lan){
+			getKategorier : function(callback){
+				var arr = [];
+				var count = 0;
+				var collection = this;
+			    var dbName = collection.config.adapter.db_name;
+			    var table = collection.config.adapter.collection_name;
+			    var sql = "SELECT * FROM " + table + " WHERE language = '"+ Ti.Locale.currentLanguage +"'";
+			    db = Ti.Database.open(dbName);
+			    var rows = db.execute(sql);
+			    while(rows.isValidRow()){
+		    	    arr[count] = {};
+				    for (var i=0, len=rows.fieldCount; i<len; i++){
+				        arr[count][rows.fieldName(i)] = rows.field(i);
+				    }
+			    	count++;
+			    	rows.next();
+			    }
+   			    rows.close();
+   			    db.close();
+				callback(arr);
+			},
+
+			getSelectedArray : function(){
 				var arr = [];
 				var collection = this;
 			    var dbName = collection.config.adapter.db_name;
 			    var table = collection.config.adapter.collection_name;
-			    var sql = "SELECT * FROM " + table + " WHERE selected = 1 and language = '"+ lan +"'";
+			    var sql = "SELECT * FROM " + table + " WHERE selected = 1 and language = '"+ Ti.Locale.currentLanguage +"'";
 			    db = Ti.Database.open(dbName);
 			    var rows = db.execute(sql);
 			    while(rows.isValidRow()){

@@ -14,7 +14,10 @@ function cleanup() {
     $.off();
 }
 
-
+function doClickAnnotation(e){
+	Ti.API.info("Annotation clicked");
+	Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+}
 
 var mapview = Alloy.Globals.Map.createView({
 	id: "mapview",
@@ -36,12 +39,13 @@ $.updateAnnotations = function(arr){
 			var img = Ti.UI.createImageView({
 				id: point.payload.id, 
 				image: point.payload.image_thumbnail_uri,
-				width: 40,
-				height: 40,
-				borderRadius: 20,
+				width: 60,
+				height: 60,
+				borderRadius: 30,
 			});
+			//img.addEventListener('click', doClickAnnotation);
 			img.addEventListener('click', function(e){
-					Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+				Ti.API.info("Someone clicked a map");
 			});
 			var pin = Alloy.Globals.Map.createAnnotation({
 				titleid: point.payload.id,
@@ -52,6 +56,7 @@ $.updateAnnotations = function(arr){
 			    animate: true,
 			    draggable:false
 			});
+			//pin.addEventListener('click', doClickAnnotation);
 			pins.push(pin);
 		});
 		mapview.addAnnotations(pins);

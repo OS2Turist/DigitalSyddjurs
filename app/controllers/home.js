@@ -78,13 +78,15 @@ function refreshUI(){
 		if(point.withinrange){
 			var place = getPositionAndSize(point.distance, point.payload.id);
 			if(elem){
-				elem.applyProperties({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius, onClick: "doClickBubble"});				
+				elem.applyProperties({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius});				
 			}else{
-				var bub = Ti.UI.createImageView({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius, onClick: "doClickBubble"});
+				var bub = Ti.UI.createImageView({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius});
+				bub.addEventListener("click", doClickBubble);
 				$.bubblescontainer.add(bub);
 			}
 		}else{
 			if(elem){
+				elem.removeEventListener("click", doClickBubble);
 				$.bubblescontainer.remove(elem);
 			}
 		}

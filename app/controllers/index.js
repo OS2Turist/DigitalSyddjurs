@@ -3,6 +3,7 @@ var masterarr = [];
 
 function cleanup() {
 	servicelistener = null;
+	masterarr = null;
 	Ti.App.removeEventListener("geofacade:location", updateArrangementer);
     $.destroy();
     $.off();
@@ -20,7 +21,6 @@ function updateList(){
 	var arr = _.filter(masterarr, function(point){
 		return _.contains(selected, point.payload.kategori);
 	});
-	//Ti.API.info(JSON.stringify(arr));
 	$.listwin.updateList(arr);
 	$.mapwin.updateAnnotations(arr);
 	$.homewin.updateHome(arr);
@@ -34,5 +34,6 @@ function updateList(){
 	Alloy.Collections.instance("Kategori").on('sync', function(){
 		updateList();
 	});
+	
 
 })();

@@ -21,6 +21,7 @@ function doChangeKm(e){
 	$.lblKmSetting.text = String.format("%d", $.sldKmSetting.value) + " KM";
 	$.win.title = L('hometitle') + " " + String.format("%d", $.sldKmSetting.value) + " KM";
 	if(e){
+		//refreshUI();
 		Alloy.Globals.geofacade.setTriggerRange(parseInt(e.value * 1000));
 	}
 }
@@ -66,14 +67,27 @@ function getPositionAndSize(distance, id){
 
 
 $.updateHome = function(arr){
+	Ti.API.info("updateHome: " + arr.length);
 	masterarr = arr;
-	refreshUI();	
+	refreshUI(arr);	
 };
-function refreshUI(){
+function refreshUI(arr){
 	//<ImageView modelid="{id}" image="{image_thumbnail_uri}" top="{top}" left="{left}" width="{width}" height="{height}" borderRadius="{radius}" onClick="doClickBubble" />
 	// first account for range
+	if(!arr){
+		arr = masterarr;
+	}
 	
-	_.each(masterarr, function(point){
+	//first we remove the ones not in the list
+	_.each($.bubblescontainer.children, function(bubble){
+		if(!_.find(arr, function(sp){return sp.payload.id == bubble.modelid;})){
+			// not found, delete
+			bubble.removeEventListener("click", doClickBubble);
+			$.bubblescontainer.remove(bubble);
+		}
+	}); 
+
+	_.each(arr, function(point){
 		var elem = _.find($.bubblescontainer.children, function(bill){ return bill.modelid == point.payload.id; });
 		if(point.withinrange){
 			var place = getPositionAndSize(point.distance, point.payload.id);

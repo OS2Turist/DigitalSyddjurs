@@ -53,7 +53,7 @@ function ServiceListener(callback){
 	
 	// and we keep checking in with the service every 30 minutes
 	timer = setInterval(function(){
-		_this.loadDataFromService();
+		_this.loadArrangementerFromService();
 		_this.loadKategorierFromService();	
 	}, 1800000);
 	

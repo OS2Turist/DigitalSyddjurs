@@ -1,3 +1,4 @@
+var fb = require('facebook');
 var args = arguments[0] || {};
 var arr = null;
 
@@ -14,10 +15,6 @@ function doClickBack(e){
 	}else{
 		$.win.close();
 	}
-}
-
-function doLinkFB(e){
-	Ti.Platform.openURL("https://www.facebook.com");
 }
 
 function doToggleFavourite(e){
@@ -53,4 +50,21 @@ function setFavText(val){
 	$.phone.title = L("phone") + arr.get("phone");
 	$.phone.phonenumber = arr.get("phone");
 	setFavText(arr.get("favorit"));
+	
+	// Add the facebook button to the container view
+	var likeButton = fb.createLikeButton({
+		top: "12",
+        height: "48", // Note: on iOS setting Ti.UI.SIZE dimensions prevents the button from being clicked
+        width: "100%",
+        objectId: "https://www.facebook.com/smartdjursland",
+        objectType: 'page', // iOS only
+        foregroundColor: "white",
+        //likeViewStyle: 'button',
+        likeViewStyle: 'box_count',
+        auxiliaryViewPosition: 'left',
+        horizontalAlignment: 'center',
+        soundEnabled: true // iOS only
+	});
+	$.fb_button_view.add(likeButton);	
+	
 })();

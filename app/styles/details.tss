@@ -6,11 +6,11 @@ Turkis: #27b4b3
  * */
 "#title" : {
 	color: "#27b4b3",
-	font: {fontFamily:'HelveticaNeue', fontSize: 22}  
+	font: {fontFamily:'HelveticaNeue', fontSize: 24}  
 },
 "#adresse" : {
 	color: "#27b4b3",
-	font: {fontFamily:'HelveticaNeue', fontSize: 18}  
+	font: {fontFamily:'HelveticaNeue', fontSize: 20}  
 },
 ".buttongreen": {
 	color: "#fff",

@@ -14,14 +14,60 @@ function cleanup() {
     $.off();
 }
 
-function doClickAnnotation(e){
-	Ti.API.info("Annotation clicked");
-	Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+function doClickMap(e){
+	Ti.API.info("Annotation clicked, source: " + e.clicksource);
+	if(e.clicksource == "rightButton"){
+		Ti.API.info("rightButton clicked");
+	}
+	//Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 }
 
-var mapview = Alloy.Globals.Map.createView({
+function updateAnnotation(ann, payload){
+	var img = Ti.UI.createImageView({
+		id: payload.id, 
+		image: payload.image_thumbnail_uri,
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+	});
+	ann.applyProperties({
+		arr_id: payload.id,
+	    latitude: payload.latitude,
+	    longitude: payload.longitude,
+	    title: payload.title,
+	    leftView: img,
+	    //rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
+	    animate: true,
+	    draggable:false
+	});	
+}
+
+function createAnnotation(payload){
+	var img = Ti.UI.createImageView({
+		arr_id: payload.id, 
+		image: payload.image_thumbnail_uri,
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+	});
+	img.addEventListener("click", function(e){Ti.API.info("IMAGE CLICKED");});
+	var pin = Alloy.Globals.Map.createAnnotation({
+		arr_id: payload.id,
+	    latitude: payload.latitude,
+	    longitude: payload.longitude,
+	    title: payload.title,
+	    leftView: img,
+	    //rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
+	    animate: true,
+	    draggable:false
+	});
+	mapview.addAnnotation(pin);
+
+}
+
+mapview = Alloy.Globals.Map.createView({
 	id: "mapview",
-	zIndex: -1,
+//	zIndex: -1,
 	mapType: Alloy.Globals.Map.NORMAL_TYPE,
 	region: defaultlocation, 
     animate:true,
@@ -32,35 +78,38 @@ var mapview = Alloy.Globals.Map.createView({
 });
 
 $.updateAnnotations = function(arr){
-	var pins = [];
-	if(mapview){
-		mapview.removeAllAnnotations();
-		_.each(arr,function(point){
-			var img = Ti.UI.createImageView({
-				id: point.payload.id, 
-				image: point.payload.image_thumbnail_uri,
-				width: 60,
-				height: 60,
-				borderRadius: 30,
-			});
-			//img.addEventListener('click', doClickAnnotation);
-			img.addEventListener('click', function(e){
-				Ti.API.info("Someone clicked a map");
-			});
-			var pin = Alloy.Globals.Map.createAnnotation({
-				titleid: point.payload.id,
-			    latitude: point.payload.latitude,
-			    longitude: point.payload.longitude,
-			    title: point.payload.title,
-			    rightView: img,
-			    animate: true,
-			    draggable:false
-			});
-			//pin.addEventListener('click', doClickAnnotation);
-			pins.push(pin);
-		});
-		mapview.addAnnotations(pins);
-	}
+	// first we loop the current ones and remove the ones not in the new array
+	_.each(mapview.annotations, function(ann){
+		if(!_.find(arr, function(sp){return sp.payload.id == ann.arr_id;})){
+			// not found, delete
+			mapview.removeAnnotation(ann);
+		}
+	}); 
+
+	// the we process the ones that are left 	
+	_.each(arr, function(elem){
+		var found_ann = _.find(mapview.annotations, function(searchpos){return searchpos.arr_id == elem.payload.id;});
+		if(found_ann){
+			var alteredflag = false;
+			// yes it is, does it need updating?
+			if(parseFloat(found_ann.latitude) != parseFloat(elem.payload.latitude)){
+				alteredflag = true;
+			}
+			if(parseFloat(found_ann.longitude) != parseFloat(elem.payload.longitude)){
+				alteredflag = true;
+			}
+			if(found_ann.title != elem.payload.title){
+				alteredflag = true;
+			}
+			if(alteredflag){
+				// Update the annotation	
+				updateAnnotation(found_ann, elem.payload);
+			}
+		}else{
+			// no it is not, create it
+			createAnnotation(elem.payload);
+		}
+	});
 };
 
 // Center on device
@@ -97,5 +146,4 @@ function doFocus(e){
 	});
 	centerButton.addEventListener("click", centerOnMe);
 	mapview.add(centerButton);
-	
 })();

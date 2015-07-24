@@ -1,5 +1,4 @@
 var args = arguments[0] || {};
-
 function cleanup() {
 	args = null;
     $.destroy();
@@ -12,6 +11,10 @@ function favouritesFilter(collection) {
 
 function doItemclick(e){
 	Alloy.createController("details", {"modelid": e.itemId}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+}
+
+function doFocus(){
+	Alloy.Collections.Arrangement.fetch();
 }
 
 (function(){

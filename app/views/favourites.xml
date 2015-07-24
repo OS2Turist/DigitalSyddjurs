@@ -1,6 +1,6 @@
 <Alloy>
 	<Collection src="Arrangement" /> 
-	<Window title="L('favorites_title')" id="win" onClose="cleanup">
+	<Window title="L('favorites_title')" id="win" onClose="cleanup" onFocus="doFocus">
 		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
 				<SearchBar />

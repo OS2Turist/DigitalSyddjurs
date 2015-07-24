@@ -32,7 +32,9 @@ function doClickBubble(e){
 	detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
 var pos_arr = [];
-function getPositionAndSize(distance, id){
+function getPositionAndSize(point, callback){
+	var distance = point.distance;
+	var id = point.payload.id;
 	// have we rendered this one before?
 	var pos = _.find($.bubblescontainer.children, function(searchpos){ return searchpos.modelid == id; });
 	//Ti.API.info("pos" + pos);
@@ -60,14 +62,13 @@ function getPositionAndSize(distance, id){
 	}
 	
 	//Ti.API.info("pos returned " + JSON.stringify(pos));
-	
-	return pos;
+	callback(pos);
+	//return pos;
 }
 
 
 
 $.updateHome = function(arr){
-	Ti.API.info("updateHome: " + arr.length);
 	masterarr = arr;
 	refreshUI(arr);	
 };
@@ -90,14 +91,17 @@ function refreshUI(arr){
 	_.each(arr, function(point){
 		var elem = _.find($.bubblescontainer.children, function(bill){ return bill.modelid == point.payload.id; });
 		if(point.withinrange){
-			var place = getPositionAndSize(point.distance, point.payload.id);
-			if(elem){
-				elem.applyProperties({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius});				
-			}else{
-				var bub = Ti.UI.createImageView({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, borderRadius: place.radius});
-				bub.addEventListener("click", doClickBubble);
-				$.bubblescontainer.add(bub);
-			}
+			//var place = getPositionAndSize(point);
+			getPositionAndSize(point, function(place){
+				if(elem){
+					elem.applyProperties({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, width: place.side, height: place.side, borderRadius: place.radius});				
+				}else{
+					// This is a new bubble, how do we show that?
+					var bub = Ti.UI.createImageView({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, width: place.side, height: place.side, borderRadius: place.radius});
+					bub.addEventListener("click", doClickBubble);
+					$.bubblescontainer.add(bub);
+				}
+			});
 		}else{
 			if(elem){
 				elem.removeEventListener("click", doClickBubble);

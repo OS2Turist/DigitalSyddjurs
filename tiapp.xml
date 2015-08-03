@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>dk.smartsyddjurs.app</id>
     <name>DigitalSyddjurs</name>
-    <version>0.8.1</version>
+    <version>0.8.2</version>
     <publisher>Appsolution</publisher>
     <url>http://smartsyddjurs.dk/</url>
     <description>Developed for Bellcom by Appsolution</description>
@@ -36,24 +36,24 @@
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleDefault</string>
                 <key>CFBundleURLTypes</key>
-                    <array>
-                        <dict>
-                            <key>CFBundleURLName</key>
-                            <!-- Application ID same as the id value in the tiapp.xml file -->
-                            <string>dk.smartsyddjurs.app</string>
-                            <key>CFBundleURLSchemes</key>
-                            <array>
-                                <!-- Prefix the Facebook App ID with 'fb' -->
-                                <string>fb1136373939711766</string>
-                            </array>
-                        </dict>
-                    </array>
-                    <key>FacebookAppID</key>
-                    <!-- Facebook App ID -->
-                    <string>1136373939711766</string>
-                    <key>FacebookDisplayName</key>
-                    <!-- Facebook App Name from developer.facebook.com -->
-                    <string>Smart Djursland Like Integration</string>
+                <array>
+                    <dict>
+                        <key>CFBundleURLName</key>
+                        <!-- Application ID same as the id value in the tiapp.xml file -->
+                        <string>dk.smartsyddjurs.app</string>
+                        <key>CFBundleURLSchemes</key>
+                        <array>
+                            <!-- Prefix the Facebook App ID with 'fb' -->
+                            <string>fb1136373939711766</string>
+                        </array>
+                    </dict>
+                </array>
+                <key>FacebookAppID</key>
+                <!-- Facebook App ID -->
+                <string>1136373939711766</string>
+                <key>FacebookDisplayName</key>
+                <!-- Facebook App Name from developer.facebook.com -->
+                <string>Smart Djursland Like Integration</string>
             </dict>
         </plist>
     </ios>

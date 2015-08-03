@@ -14,9 +14,9 @@ function doItemclick(e){
 }
 
 function doFocus(){
-	Alloy.Collections.Arrangement.fetch();
+	doUpdateFavourites();
 }
 
 (function(){
-	Alloy.Collections.Arrangement.fetch();
+	doUpdateFavourites();
 })();

@@ -9,8 +9,8 @@
 					<View layout="vertical" top="12" width="96%" height="Ti.UI.SIZE">
 						<View id="fb_button_view" width="100%" right="0" height="Ti.UI.SIZE" />
 						<View layout="vertical" left="0" width="100%" height="Ti.UI.SIZE">
-							<Label id="title" left="0">Glasmuseet Ebeltoft</Label>
-							<Label id="adresse" left="0">Strandvejen 8, 8400 Ebeltoft</Label>
+							<Label id="title" left="0" />
+							<Label id="adresse" left="0" />
 						</View>
 					</View>
 					<View height="Ti.UI.SIZE" top="12" width="96%">
@@ -21,10 +21,10 @@
 						<Button id="phone" autoLink="true" right="0" width="49%" class="phonebutton" onClick="doDialUp" />
 					</View>
 					<View layout="vertical" top="12" width="96%" height="Ti.UI.SIZE">
-						<Button class="buttonlightgrey" title="L('findroute')" />
+						<Button class="buttonlightgrey" onClick="doFindRoute" title="L('findroute')" />
 					</View>
 					<View layout="vertical" top="12" width="96%" height="Ti.UI.SIZE">
-						<Button class="buttongreen">Køb entre</Button>>
+						<Button class="buttongreen" onClick="doBuyTicket">Køb entre</Button>>
 					</View>
 					<View layout="vertical" top="12" bottom="32" width="100%" height="Ti.UI.SIZE">
 						<ImageView id="mainImage" width="100%" />

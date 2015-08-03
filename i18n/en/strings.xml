@@ -1,6 +1,7 @@
 <resources>
 	<!-- Generic strings -->
 	<string name="back_button">Back</string>
+	<string name="notimplemetedinbeta">This feature is not implemented in the Beta product.</string>
 	
 	<!-- Tab group -->
 	<string name="hometab">Oversigt</string>
@@ -26,7 +27,7 @@
 	<string name="maptitle">MAP</string>
 	
 	<!-- Favorites screen -->
-	<string name="favorites_title">Favorites</string>
+	<string name="favorites_title">FAVOURITES</string>
 	
 	<!-- Settings screen -->
 	<string name="settings_title">Settings</string>

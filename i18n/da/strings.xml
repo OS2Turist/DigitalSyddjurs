@@ -1,7 +1,8 @@
 <resources>
 	<!-- Generic strings -->
 	<string name="back_button">Tilbage</string>
-	
+	<string name="notimplemetedinbeta">Denne funktion er ikke implementeret i beta versionen</string>
+
 	<!-- Tab group -->
 	<string name="hometab">Oversigt</string>
 	<string name="profiletab">Profil</string>
@@ -26,7 +27,7 @@
 	<string name="maptitle">KORT</string>
 	
 	<!-- Favorites screen -->
-	<string name="favorites_title">Favoritter</string>
+	<string name="favorites_title">FAVORITTER</string>
 	
 	<!-- Settings screen -->
 	<string name="settings_title">Indstillinger</string>

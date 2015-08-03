@@ -27,10 +27,9 @@ function doChangeKm(e){
 }
 
 function doClickBubble(e){
-	var args = {"modelid": e.source.modelid};
-	var detailwin = Alloy.createController("details", args).getView();
-	detailwin.open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+	Alloy.createController("details", {"modelid": e.source.modelid}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
+
 var pos_arr = [];
 function getPositionAndSize(point, callback){
 	var distance = point.distance;

@@ -1,6 +1,7 @@
 var fb = require('facebook');
 var args = arguments[0] || {};
 var arr = null;
+var events = Alloy.Collections.instance("Arrangement");
 
 function doClose(e){
 	args = null;
@@ -18,17 +19,29 @@ function doClickBack(e){
 }
 
 function doToggleFavourite(e){
-	if(arr.get("favorit") == 0){
-		arr = arr.setFavourite();
+	if(arr){
+		if(arr.get("favorit") === 0){
+			arr = arr.setFavourite();
+		}else{
+			arr = arr.removeFavourite();
+		}
+		setFavText(arr.get("favorit"));
 	}else{
-		arr = arr.removeFavourite();
+		Ti.API.info("arr is null");
 	}
-	setFavText(arr.get("favorit"));
 }
 
 function doDialUp(e){
 	//Ti.API.info($.phone.phonenumber);
 	Titanium.Platform.openURL("tel:" + $.phone.phonenumber);
+}
+
+function doFindRoute(e){
+	alert(L("notimplemetedinbeta"));
+}
+
+function doBuyTicket(e){
+	alert(L("notimplemetedinbeta"));
 }
 
 function setFavText(val){
@@ -37,11 +50,11 @@ function setFavText(val){
 	}else{
 		$.favourite.title = L("removefromfavourites");
 	}
-
 }
 
 (function(){
-	arr = Alloy.Collections.Arrangement.get(args.modelid);
+	events.fetch();
+	arr = events.get(args.modelid);
 	
 	$.title.text = arr.get("title");
 	$.adresse.text = arr.get("street1") + ", " + arr.get("postal_code") + " " + arr.get("city");

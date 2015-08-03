@@ -14,7 +14,7 @@
 						</View>
 					</ItemTemplate>
 				</Templates>
-				<ListSection dataCollection="Arrangement" dataFilter="favouritesFilter">
+				<ListSection dataCollection="Arrangement" dataFilter="favouritesFilter" dataFunction="doUpdateFavourites">
 					<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" searchableText="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
 				</ListSection>
 			</ListView>		

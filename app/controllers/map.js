@@ -19,7 +19,7 @@ function doClickMap(e){
 	if(e.clicksource == "rightButton"){
 		Ti.API.info("rightButton clicked");
 	}
-	//Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+	//Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
 
 function updateAnnotation(ann, payload){

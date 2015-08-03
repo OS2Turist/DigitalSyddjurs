@@ -1,4 +1,5 @@
 var args = arguments[0] || {};
+var events = Alloy.Collections.Arrangement;
 function cleanup() {
 	args = null;
     $.destroy();
@@ -18,5 +19,7 @@ function doFocus(){
 }
 
 (function(){
+	events.fetch();
 	doUpdateFavourites();
+	
 })();

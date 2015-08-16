@@ -3,6 +3,8 @@ var args = arguments[0] || {};
 var arr = null;
 var events = Alloy.Collections.instance("Arrangement");
 
+
+
 function doClose(e){
 	args = null;
 	arr = null;
@@ -29,6 +31,7 @@ function doToggleFavourite(e){
 	}else{
 		Ti.API.info("arr is null");
 	}
+	args.root.doListUpdate();
 }
 
 function doDialUp(e){

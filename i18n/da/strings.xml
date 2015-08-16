@@ -4,7 +4,7 @@
 	<string name="notimplemetedinbeta">Denne funktion er ikke implementeret i beta versionen</string>
 
 	<!-- Tab group -->
-	<string name="hometab">Oversigt</string>
+	<string name="hometab">Opdag</string>
 	<string name="profiletab">Profil</string>
 	<string name="favouritestab">Favoritter</string>
 	<string name="listtab">Liste</string>

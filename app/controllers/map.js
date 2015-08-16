@@ -4,6 +4,11 @@ var firstfocus = true;
 // Centreret på djursland
 var defaultlocation = {latitude:56.369152, longitude:10.583272,latitudeDelta:0.7, longitudeDelta:0.7};
 
+this.init = function(params){
+	args = params;
+};
+
+
 function cleanup() {
 	args = null;
 	kategorier = null;
@@ -19,7 +24,7 @@ function doClickMap(e){
 	if(e.clicksource == "rightButton"){
 		Ti.API.info("rightButton clicked");
 	}
-	//Alloy.createController("details", {"modelid": e.source.id}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+	//Alloy.createController("details", {"modelid": e.source.id, root: args.parent}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
 
 function updateAnnotation(ann, payload){

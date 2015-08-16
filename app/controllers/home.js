@@ -1,6 +1,11 @@
 var args = arguments[0] || {};
 var masterarr = [];
 
+this.init = function(params){
+	args = params;
+};
+
+
 function cleanup() {
 	args = null;
 	pos_arr = null;
@@ -27,7 +32,7 @@ function doChangeKm(e){
 }
 
 function doClickBubble(e){
-	Alloy.createController("details", {"modelid": e.source.modelid}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+	Alloy.createController("details", {"modelid": e.source.modelid, root: args.parent}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
 
 var pos_arr = [];

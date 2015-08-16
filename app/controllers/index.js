@@ -28,9 +28,7 @@ this.getArrangement = function(id){
 };
 
 this.setFavourite = function(id){
-	Ti.API.info("1 events: " + JSON.stringify(events));
 	var event = events.get(id); 
-	Ti.API.info("2 event: " + JSON.stringify(event));
 	event.setFavourite();
 	var p = _.find(masterarr, function(point){
 		return point.payload.id === id;
@@ -46,6 +44,10 @@ this.removeFavourite = function(id){
 	});
 	p.payload.favorit = 0;
 	return p;
+};
+
+this.doListUpdate = function(){
+	updateList();
 };
 
 function updateList(){
@@ -67,6 +69,11 @@ function updateList(){
 	categories.on('sync', function(){
 		updateList();
 	});
+	$.listwin.init({parent: $});
+	$.homewin.init({parent: $});
+	$.mapwin.init({parent: $});
+	$.favouriteswin.init({parent: $});
+	//favouriteswin
 	
 	events.fetch();
 })();

@@ -1,10 +1,10 @@
 <Alloy>
-	<Window title="L('listtitle')" id="win" onClose="cleanup">
+	<Window title="L('listtitle')" id="win" onClose="cleanup" onFocus="doFocus">
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
 		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
-			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
+			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick" onRowAction="doRowAction">
 				<SearchBar />
 				<Templates>
 					<ItemTemplate name="template">

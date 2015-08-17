@@ -12,6 +12,7 @@ this.init = function(params){
 function cleanup() {
 	args = null;
 	kategorier = null;
+	mapview = null;
 	arrangementer = null;
 	firstfocus = null;
 	defaultlocation = null;
@@ -41,7 +42,6 @@ function updateAnnotation(ann, payload){
 	    longitude: payload.longitude,
 	    title: payload.title,
 	    leftView: img,
-	    //rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
 	    animate: true,
 	    draggable:false
 	});	
@@ -55,14 +55,12 @@ function createAnnotation(payload){
 		height: 60,
 		borderRadius: 30,
 	});
-	img.addEventListener("click", function(e){Ti.API.info("IMAGE CLICKED");});
 	var pin = Alloy.Globals.Map.createAnnotation({
 		arr_id: payload.id,
 	    latitude: payload.latitude,
 	    longitude: payload.longitude,
 	    title: payload.title,
 	    leftView: img,
-	    //rightButton: Titanium.UI.iPhone.SystemButton.DISCLOSURE,
 	    animate: true,
 	    draggable:false
 	});
@@ -70,7 +68,7 @@ function createAnnotation(payload){
 
 }
 
-mapview = Alloy.Globals.Map.createView({
+var mapview = Alloy.Globals.Map.createView({
 	id: "mapview",
 //	zIndex: -1,
 	mapType: Alloy.Globals.Map.NORMAL_TYPE,
@@ -138,10 +136,16 @@ function doFocus(e){
 	}
 }
 
+
+
 (function(){
 	$.settingsmenu.init({parentController: $});
 	// Add the map to the window
 	$.win.add(mapview);
+	
+	mapview.addEventListener("click",function(evt){
+		//Ti.API.info("Annotation " + evt.title + " clicked, id: " + evt.annotation.arr_id);
+	});
 	
 	// Create the button that centers the map on the device
 	var centerButton = Ti.UI.createImageView({

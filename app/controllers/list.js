@@ -37,7 +37,7 @@ function formatDistance(rawdist){
 }
 
 $.updateList = function(trackpoints){
-	Ti.API.info(JSON.stringify(trackpoints));
+	//Ti.API.info(JSON.stringify(trackpoints));
 	var dataSet = [];
 	_.each(trackpoints, function(point){
 		//<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" searchableText="{title}"

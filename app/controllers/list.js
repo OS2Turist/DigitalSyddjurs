@@ -37,11 +37,12 @@ function formatDistance(rawdist){
 }
 
 $.updateList = function(trackpoints){
+	Ti.API.info(JSON.stringify(trackpoints));
 	var dataSet = [];
 	_.each(trackpoints, function(point){
 		//<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" searchableText="{title}"
 		// distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
-		Ti.API.info("favorit "+ point.payload.favorit);
+		//Ti.API.info("favorit "+ point.payload.favorit);
 		var formatted_distance = formatDistance(point.distance);
 		var action_arr = [];
 		if(parseInt(point.payload.favorit) == 1){

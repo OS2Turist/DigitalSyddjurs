@@ -1,7 +1,6 @@
 var fb = require('facebook');
 var args = arguments[0] || {};
 var arr = null;
-var events = Alloy.Collections.instance("Arrangement");
 
 
 
@@ -22,15 +21,16 @@ function doClickBack(e){
 
 function doToggleFavourite(e){
 	if(arr){
-		if(arr.get("favorit") === 0){
-			arr = arr.setFavourite();
+		if(arr.payload.favorit === 0){
+			arr = args.root.setFavourite(args.modelid);
 		}else{
-			arr = arr.removeFavourite();
+			arr = args.root.removeFavourite(args.modelid);
 		}
-		setFavText(arr.get("favorit"));
+		setFavText(arr.payload.favorit);
 	}else{
 		Ti.API.info("arr is null");
 	}
+	//args.modelid
 	args.root.doListUpdate();
 }
 
@@ -56,16 +56,16 @@ function setFavText(val){
 }
 
 (function(){
-	events.fetch();
-	arr = events.get(args.modelid);
+	//events.fetch();
+	arr = args.root.getArrangement(args.modelid);
 	
-	$.title.text = arr.get("title");
-	$.adresse.text = arr.get("street1") + ", " + arr.get("postal_code") + " " + arr.get("city");
-	$.description.text = arr.get("description"); 	
-	$.mainImage.image = arr.get("image_medium_uri");
-	$.phone.title = L("phone") + arr.get("phone");
-	$.phone.phonenumber = arr.get("phone");
-	setFavText(arr.get("favorit"));
+	$.title.text = arr.payload.title;
+	$.adresse.text = arr.payload.street1 + ", " + arr.payload.postal_code + " " + arr.payload.city;
+	$.description.text = arr.payload.description; 	
+	$.mainImage.image = arr.payload.image_medium_uri;
+	$.phone.title = L("phone") + arr.payload.phone;
+	$.phone.phonenumber = arr.payload.phone;
+	setFavText(arr.payload.favorit);
 	
 	// Add the facebook button to the container view
 	var likeButton = fb.createLikeButton({

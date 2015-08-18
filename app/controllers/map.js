@@ -1,4 +1,5 @@
 var args = arguments[0] || {};
+var pinurl = "/map/purplepin_20x55.png";
 
 var firstfocus = true;
 // Centreret på djursland
@@ -11,9 +12,8 @@ this.init = function(params){
 
 function cleanup() {
 	args = null;
-	kategorier = null;
 	mapview = null;
-	arrangementer = null;
+	pinurl = null;
 	firstfocus = null;
 	defaultlocation = null;
     $.destroy();
@@ -33,14 +33,14 @@ function updateAnnotation(ann, payload){
 		id: payload.id, 
 		image: payload.image_thumbnail_uri,
 		width: 60,
-		height: 60,
-		borderRadius: 30,
+		height: 60
 	});
 	ann.applyProperties({
 		arr_id: payload.id,
 	    latitude: payload.latitude,
 	    longitude: payload.longitude,
 	    title: payload.title,
+	    image: pinurl,
 	    leftView: img,
 	    animate: true,
 	    draggable:false
@@ -52,14 +52,14 @@ function createAnnotation(payload){
 		arr_id: payload.id, 
 		image: payload.image_thumbnail_uri,
 		width: 60,
-		height: 60,
-		borderRadius: 30,
+		height: 60
 	});
 	var pin = Alloy.Globals.Map.createAnnotation({
 		arr_id: payload.id,
 	    latitude: payload.latitude,
 	    longitude: payload.longitude,
 	    title: payload.title,
+	    image: pinurl,
 	    leftView: img,
 	    animate: true,
 	    draggable:false

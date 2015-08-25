@@ -27,6 +27,7 @@ this.getArrangement = function(id){
 	});
 };
 
+
 this.setFavourite = function(id){
 	var event = events.get(id); 
 	event.setFavourite();

@@ -37,6 +37,8 @@ function GeoFacade(geolib, accuracy){
 			_.each(_trackpoints, function(point){
 				// calculate the distance
 				point.distance = geolib.getDistance(newlocation, point);
+				//getRhumbLineBearing: function(originLL, destLL)
+				point.directionFromMyLocation = geolib.getRhumbLineBearing(newlocation, point);
 				// set if the point is within range
 				_this.setWithinRange(point);
 			});

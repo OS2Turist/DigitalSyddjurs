@@ -47,9 +47,9 @@ $.updateList = function(trackpoints){
 		var action_arr = [];
 		if(parseInt(point.payload.favorit) == 1){
 			// This is a favorite, offer to remove from favourites
-			action_arr.push({color: "red", style: Titanium.UI.iOS.ROW_ACTION_STYLE_DEFAULT, title: L("removefromfavourites")});
+			action_arr.push({color: "#595959", style: Titanium.UI.iOS.ROW_ACTION_STYLE_DEFAULT, title: L("removefromfavourites")});
 		}else{
-			action_arr.push({color: "green", style: Titanium.UI.iOS.ROW_ACTION_STYLE_DEFAULT, title: L("addtofavourites")});
+			action_arr.push({color: "#27b4b3", style: Titanium.UI.iOS.ROW_ACTION_STYLE_DEFAULT, title: L("addtofavourites")});
 			// Other way around
 		}
 		dataSet.push({ 

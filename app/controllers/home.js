@@ -1,5 +1,10 @@
 var args = arguments[0] || {};
 var masterarr = [];
+var viewsize = {width:320, height: 568};
+var maxDis = 30000;
+var circle = null;
+
+
 
 this.init = function(params){
 	args = params;
@@ -23,11 +28,13 @@ function getRandomPercentage(min, max) {
  * Update the range of the scanner
  */
 function doChangeKm(e){
-	$.lblKmSetting.text = String.format("%d", $.sldKmSetting.value) + " KM";
-	$.win.title = L('hometitle') + " " + String.format("%d", $.sldKmSetting.value) + " KM";
+	var km = String.format("%d", $.sldKmSetting.value) + " KM";
+	$.lblKmSetting.text = km;
+	$.win.title = L('hometitle') + " " + km;
+	maxDis = $.sldKmSetting.value;
 	if(e){
-		//refreshUI();
-		Alloy.Globals.geofacade.setTriggerRange(parseInt(e.value * 1000));
+		refreshUI();
+		//Alloy.Globals.geofacade.setTriggerRange(parseInt(e.value));
 	}
 }
 
@@ -36,38 +43,38 @@ function doClickBubble(e){
 }
 
 var pos_arr = [];
-function getPositionAndSize(point, callback){
+function getPositionAndSize(point, maxdistance, vc, callback){
+	
+	
+	//Ti.API.info(point.payload.title + " " + point.directionFromMyLocation + " " + point.distance);
 	var distance = point.distance;
 	var id = point.payload.id;
 	// have we rendered this one before?
-	var pos = _.find($.bubblescontainer.children, function(searchpos){ return searchpos.modelid == id; });
-	//Ti.API.info("pos" + pos);
-	if(!pos){
+	var place = _.find(pos_arr, function(searchpos){ return searchpos.id == id; });
 
-		pos = {};
-		pos.id = id;
-		pos.left = getRandomPercentage(10, 70);
-		pos.top = getRandomPercentage(10, 70);
-		//Ti.API.info("new pos generated " + pos);
-
+	if(!place){
+		place = {};
+		place.id = id;
+		//place.rotation = Math.random() * (2 * Math.PI); 
 	}
-	if(distance <= 1000){
-		pos.side = 100;
-		pos.radius = 50;
-	}else if(distance > 1000 && distance < 2000){
-		pos.side = 80;
-		pos.radius = 40;
-	}else if(distance > 2000 && distance < 4000){
-		pos.side = 60;
-		pos.radius = 30;
-	}else{
-		pos.side = 40;
-		pos.radius = 20;
-	}
+	place.rotation = point.directionFromMyLocation * Math.PI / 180;
+	place.side = 60;
+	place.radius = 30;
+	vc.center = {x: vc.x - place.radius, y:vc.y - place.radius};
 	
-	//Ti.API.info("pos returned " + JSON.stringify(pos));
-	callback(pos);
-	//return pos;
+	//value = (itemDis/maxDis)*9 + 1;
+	//var rotation = Math.random() * (2 * Math.PI);
+	//relDis = Math.log(value, 10);
+	var value = (distance/maxdistance)*9 + 1;
+	var relDis = Math.log(value) * (Math.E / 10); // = value between 0-1
+	//Ti.API.info("distance: " + distance + " maxdistance: " + maxdistance + "relDis: " + relDis);
+	place.top = vc.center.y + (vc.y * relDis * (Math.sin(place.rotation) * -1));
+	place.left = vc.center.x + (vc.x * relDis * Math.cos(place.rotation));
+	
+	pos_arr.push(place);	
+
+
+	callback(place);
 }
 
 
@@ -85,18 +92,21 @@ function refreshUI(arr){
 	
 	//first we remove the ones not in the list
 	_.each($.bubblescontainer.children, function(bubble){
-		if(!_.find(arr, function(sp){return sp.payload.id == bubble.modelid;})){
-			// not found, delete
-			bubble.removeEventListener("click", doClickBubble);
-			$.bubblescontainer.remove(bubble);
+		if(bubble.modelid){
+			if(!_.find(arr, function(sp){return sp.payload.id == bubble.modelid;})){
+				// not found, delete
+				bubble.removeEventListener("click", doClickBubble);
+				$.bubblescontainer.remove(bubble);
+			}
 		}
 	}); 
 
 	_.each(arr, function(point){
 		var elem = _.find($.bubblescontainer.children, function(bill){ return bill.modelid == point.payload.id; });
-		if(point.withinrange){
+		
+		if(point.distance < $.sldKmSetting.value){
 			//var place = getPositionAndSize(point);
-			getPositionAndSize(point, function(place){
+			getPositionAndSize(point, maxDis, viewsize, function(place){
 				if(elem){
 					elem.applyProperties({modelid: point.payload.id, image: point.payload.image_thumbnail_uri, top: place.top, left: place.left, width: place.side, height: place.side, borderRadius: place.radius});				
 				}else{
@@ -115,23 +125,23 @@ function refreshUI(arr){
 	});
 }
 
-/*
-function transformData(model){
-	var transform = model.toJSON();
-	var size = getPositionAndSize(transform.distance, transform.id);
-	transform.left = size.left;
-	transform.top = size.top;
-	transform.width = size.side;
-	transform.height = size.side;
-	transform.radius = size.radius;
-	return transform;
-}
 
-*/
 (function(){
 	
+	// get the max distance
+	maxDis = $.sldKmSetting.value;
+	
+	// get the size of the view object
+	var tmp = $.bubblescontainer.toImage();
+	viewsize.width = tmp.width;
+	viewsize.height = tmp.height;
+	viewsize.x = viewsize.width / 2;
+	viewsize.y = viewsize.width / 2;
+	
+	var circ = Titanium.UI.createImageView({width:viewsize.width-60, height: viewsize.width-60, top: 30, left: 30, backgroundColor: "#fff", borderRadius: (viewsize.width - 60)/2 });
+	$.bubblescontainer.add(circ);
 
-	refreshUI();
+	//refreshUI();
 	// pass reference to the required menu view
 	$.settingsmenu.init({parentController: $});
 	$.win.title = L('hometitle') + " 30 KM";

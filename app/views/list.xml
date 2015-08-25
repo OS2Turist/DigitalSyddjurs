@@ -1,5 +1,6 @@
 <Alloy>
 	<Window title="L('listtitle')" id="win" onClose="cleanup" onFocus="doFocus">
+		<LeftNavButton/>
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
@@ -7,15 +8,15 @@
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick" onRowAction="doRowAction">
 				<SearchBar />
 				<Templates>
-					<ItemTemplate name="template">
-						<View layout="horizontal" left="2" right="2" top="1" bottom="1" height="Ti.UI.SIZE" width="Ti.UI.FILL" bindId="rowView">
-							<ImageView bindId="arrimage" top="2" id="arrimage" width="40" height="40" borderRadius="20" />
-							<View layout="vertical" width="60%" height="50">
-								<Label bindId="title" left="2" id="title" />
+					<ItemTemplate name="template" height="80" width="100%">
+						<View layout="horizontal" left="2" right="2" top="1" bottom="1" height="Ti.UI.SIZE" width="100%" bindId="rowView">
+							<ImageView bindId="arrimage" top="2" left="2" id="arrimage" width="70" height="70" borderRadius="35" />
+							<View left="2" right="2" height="Ti.UI.SIZE">
+								<Label bindId="title" id="title" width="74%" />
+								<Label bindId="distance" right="2" textAlign="Titanium.UI.TEXT_ALIGNMENT_RIGHT" width="24%" id="distance"/>
 							</View>
-							<View width="20%" height="50">
-								<Label bindId="distance" left="2" id="distance"/>
-							</View>
+							
+							
 						</View>
 					</ItemTemplate>
 				</Templates>

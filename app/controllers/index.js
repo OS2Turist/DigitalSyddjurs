@@ -15,10 +15,10 @@ function cleanup() {
 }
 
 function updateArrangementer(e){
-	//
+	//Ti.API.info("TEST" + e.location);
 	masterarr = e.trackpoints;
 	events.fetch();
-	updateList();
+	updateList(e.location);
 }
 
 this.getArrangement = function(id){
@@ -51,7 +51,7 @@ this.doListUpdate = function(){
 	updateList();
 };
 
-function updateList(){
+function updateList(location){
 	var selected = categories.getSelectedArray();
 	//Ti.API.info(JSON.stringify(selected));
 	var arr = _.filter(masterarr, function(point){
@@ -59,7 +59,7 @@ function updateList(){
 	});
 	$.listwin.updateList(arr);
 	$.mapwin.updateAnnotations(arr);
-	$.homewin.updateHome(arr);
+	$.homewin.updateHome(arr, location);
 }
 
 (function(){

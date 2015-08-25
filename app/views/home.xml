@@ -8,8 +8,8 @@
 			<View id="bubblescontainer" height="Ti.UI.FILL" width="Ti.UI.FILL" bottom="15%" />
 			<!--</ScrollView>-->
 			<View top="85%" layout="vertical" left="5%" width="90%">
-				<Label id="lblKmSetting" right="0" text="30 KM"/>
-				<Slider id="sldKmSetting" min="0" max="200000" width="100%" value="30000" onChange="doChangeKm" />
+				<Label id="lblKmSetting" right="0" text="200 KM"/>
+				<Slider id="sldKmSetting" min="500" max="30000" width="100%" value="30000" onChange="doChangeKm" />
 			</View>
 		</View>
 		<Require id="settingsmenu" src="settingsview" />

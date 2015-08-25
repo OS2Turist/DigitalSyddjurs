@@ -1,8 +1,16 @@
 var args = arguments[0] || {};
 var masterarr = [];
 var viewsize = {width:320, height: 568};
+var slidermax = $.sldKmSetting.getMax();
 var maxDis = 30000;
 var circle = null;
+var mapview = null;
+var defaultlocation = {latitude:56.369152, longitude:10.583272,latitudeDelta:0.7, longitudeDelta:0.7};
+var globalradius = 6378.137;
+var circumference = 2 * Math.PI * globalradius;
+var degreeInKM = circumference / 360;
+var picradius = 10;
+
 
 
 
@@ -10,6 +18,12 @@ this.init = function(params){
 	args = params;
 };
 
+function setPicRadius(){
+	var alpha = maxDis / slidermax;
+	var minSize = 0.10;
+	var maxSize = 0.20; 
+	picradius = minSize * viewsize.width * alpha + maxSize * viewsize.width * (1 - alpha);  
+}
 
 function cleanup() {
 	args = null;
@@ -28,10 +42,11 @@ function getRandomPercentage(min, max) {
  * Update the range of the scanner
  */
 function doChangeKm(e){
-	var km = String.format("%d", $.sldKmSetting.value) + " KM";
+	var km = String.format("%d", Math.floor($.sldKmSetting.value / 1000)) + " KM";
 	$.lblKmSetting.text = km;
 	$.win.title = L('hometitle') + " " + km;
 	maxDis = $.sldKmSetting.value;
+	centerMap(null, maxDis);
 	if(e){
 		refreshUI();
 		//Alloy.Globals.geofacade.setTriggerRange(parseInt(e.value));
@@ -55,20 +70,17 @@ function getPositionAndSize(point, maxdistance, vc, callback){
 	if(!place){
 		place = {};
 		place.id = id;
-		//place.rotation = Math.random() * (2 * Math.PI); 
 	}
-	place.rotation = point.directionFromMyLocation * Math.PI / 180;
-	place.side = 60;
-	place.radius = 30;
+	place.rotation = point.directionFromMyLocation * Math.PI / 180 - (Math.PI / 2);
+	//Ti.API.info(point.directionFromMyLocation);
+	place.side = picradius;
+	place.radius = place.side / 2;
 	vc.center = {x: vc.x - place.radius, y:vc.y - place.radius};
 	
-	//value = (itemDis/maxDis)*9 + 1;
-	//var rotation = Math.random() * (2 * Math.PI);
-	//relDis = Math.log(value, 10);
-	var value = (distance/maxdistance)*9 + 1;
-	var relDis = Math.log(value) * (Math.E / 10); // = value between 0-1
-	//Ti.API.info("distance: " + distance + " maxdistance: " + maxdistance + "relDis: " + relDis);
-	place.top = vc.center.y + (vc.y * relDis * (Math.sin(place.rotation) * -1));
+	//var value = (distance/maxdistance)*9 + 1;
+	//var relDis = Math.log(value) * (Math.E / 10); // = value between 0-1
+	var relDis = distance /maxdistance;
+	place.top = vc.center.y + (vc.y * relDis * Math.sin(place.rotation));
 	place.left = vc.center.x + (vc.x * relDis * Math.cos(place.rotation));
 	
 	pos_arr.push(place);	
@@ -77,11 +89,35 @@ function getPositionAndSize(point, maxdistance, vc, callback){
 	callback(place);
 }
 
+function centerMap(location, afstand){
+	setPicRadius();
+	afstand = afstand * 2;
+	var region = {};
+	region.bearing = 0;
+	if(location){
+		region.latitude = location.latitude;
+		region.longitude = location.longitude;
+		defaultlocation = location;
+	}else{
+		//defaultlocation
+		region.latitude = defaultlocation.latitude;
+		region.longitude = defaultlocation.longitude;
+	}
+	
+	region.latitudeDelta = afstand / 1000 / degreeInKM;
+	region.longitudeDelta = afstand / 1000 / degreeInKM;
+	//Ti.API.info("region "+ JSON.stringify(region));
+	mapview.setRegion(region);
+}
 
-
-$.updateHome = function(arr){
-	masterarr = arr;
-	refreshUI(arr);	
+$.updateHome = function(arr, location){
+	if(location){
+		//Ti.API.info("location: " + JSON.stringify(location));
+		centerMap(location, maxDis);
+		// center the map
+		masterarr = arr;
+		refreshUI(arr);	
+	}
 };
 function refreshUI(arr){
 	//<ImageView modelid="{id}" image="{image_thumbnail_uri}" top="{top}" left="{left}" width="{width}" height="{height}" borderRadius="{radius}" onClick="doClickBubble" />
@@ -138,8 +174,26 @@ function refreshUI(arr){
 	viewsize.x = viewsize.width / 2;
 	viewsize.y = viewsize.width / 2;
 	
-	var circ = Titanium.UI.createImageView({width:viewsize.width-60, height: viewsize.width-60, top: 30, left: 30, backgroundColor: "#fff", borderRadius: (viewsize.width - 60)/2 });
-	$.bubblescontainer.add(circ);
+	Ti.API.info("size: " + JSON.stringify(viewsize));
+	
+	mapview = Alloy.Globals.Map.createView({
+		id: "mapview",
+	//	zIndex: -1,
+		mapType: Alloy.Globals.Map.NORMAL_TYPE,
+		region: defaultlocation, 
+	    animate:false,
+	    touchEnabled: false,
+	    //regionFit:true,
+	    userLocation:true,
+	    width:viewsize.width-picradius,
+	    height: viewsize.width-picradius, 
+	    top: picradius/2, 
+	    left: picradius/2
+	    ,borderRadius: (viewsize.width - picradius)/2 
+	});
+	
+	//var circ = Titanium.UI.createImageView({width:viewsize.width-60, height: viewsize.width-60, top: 30, left: 30, backgroundColor: "#fff", borderRadius: (viewsize.width - 60)/2 });
+	$.bubblescontainer.add(mapview);
 
 	//refreshUI();
 	// pass reference to the required menu view

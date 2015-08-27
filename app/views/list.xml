@@ -1,10 +1,12 @@
 <Alloy>
 	<Window title="L('listtitle')" id="win" onClose="cleanup" onFocus="doFocus">
-		<LeftNavButton/>
+		<LeftNavButton>
+			<Button></Button>
+		</LeftNavButton>
 		<RightNavButton>
 			<Button id="menubutton" image="/tabicons/options.png" />
 		</RightNavButton>>
-		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
+		<!--<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">-->
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick" onRowAction="doRowAction">
 				<SearchBar />
 				<Templates>
@@ -27,7 +29,7 @@
 				-->
 				<ListSection/>
 			</ListView>		
-		</ScrollView>
+		<!--</ScrollView>-->
 		<Require id="settingsmenu" src="settingsview" />
 	</Window>
 </Alloy>

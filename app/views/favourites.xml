@@ -1,9 +1,13 @@
 <Alloy>
 	<Collection src="Arrangement" /> 
 	<Window title="L('favorites_title')" id="win" onClose="cleanup" onFocus="doFocus">
-		<LeftNavButton/>
-		<RightNavButton/>
-		<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">
+		<LeftNavButton>
+			<Button></Button>
+		</LeftNavButton>
+		<RightNavButton>
+			<Button></Button>
+		</RightNavButton>
+		<!--<ScrollView layout="vertical" height="Ti.UI.FILL" width="Ti.UI.FILL">-->
 			<ListView id="lvEvents" defaultItemTemplate="template" onItemclick="doItemclick">
 				<SearchBar />
 				<Templates>
@@ -20,7 +24,7 @@
 					<ListItem itemId="{id}" template="{template}" arrimage:image="{image_thumbnail_uri}" title:text="{title}" searchableText="{title}" distance:text="{distanceString}" accessoryType="Titanium.UI.LIST_ACCESSORY_TYPE_DETAIL"/>
 				</ListSection>
 			</ListView>		
-		</ScrollView>
+		<!--</ScrollView>-->
 		<Require id="settingsmenu" src="settingsview" />
 	</Window>
 </Alloy>

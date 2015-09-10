@@ -20,47 +20,63 @@ function cleanup() {
     $.off();
 }
 
-function doClickMap(e){
-	Ti.API.info("Annotation clicked, source: " + e.clicksource);
-	if(e.clicksource == "rightButton"){
-		Ti.API.info("rightButton clicked");
-	}
-	//Alloy.createController("details", {"modelid": e.source.id, root: args.parent}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
+
+function clickNotation(e){
+	Alloy.createController("details", {"modelid": e.source.arr_id, root: args.parent}).getView().open({transition: Titanium.UI.iPhone.AnimationStyle.CURL_UP});
 }
 
-function updateAnnotation(ann, payload){
-	var img = Ti.UI.createImageView({
+function createAnnotationImage(payload){
+	return Ti.UI.createImageView({
 		id: payload.id, 
 		image: payload.image_thumbnail_uri,
 		width: 60,
 		height: 60
 	});
+}
+
+function createAnnotationButton(id){
+	var btnview = Ti.UI.createView({
+		width: "60",
+		height: "60",
+		layout: "composite"
+	});
+	var btn = Ti.UI.createButton({
+		arr_id: id,
+		title: ">>",
+		width:"40",
+		height: "40",
+		top: "0",
+		color: "#595959",
+		font: {fontFamily:'HelveticaNeue'}
+	});
+	btn.addEventListener("click", clickNotation);
+	btnview.add(btn);
+	return btnview;
+}
+
+function updateAnnotation(ann, payload){
 	ann.applyProperties({
 		arr_id: payload.id,
 	    latitude: payload.latitude,
 	    longitude: payload.longitude,
 	    title: payload.title,
 	    image: pinurl,
-	    leftView: img,
+	    leftView: createAnnotationImage(payload),
+	    rightView:  createAnnotationButton(payload.id),
 	    animate: true,
 	    draggable:false
 	});	
 }
 
 function createAnnotation(payload){
-	var img = Ti.UI.createImageView({
-		arr_id: payload.id, 
-		image: payload.image_thumbnail_uri,
-		width: 60,
-		height: 60
-	});
 	var pin = Alloy.Globals.Map.createAnnotation({
 		arr_id: payload.id,
 	    latitude: payload.latitude,
 	    longitude: payload.longitude,
 	    title: payload.title,
 	    image: pinurl,
-	    leftView: img,
+	    leftView: createAnnotationImage(payload),
+	    rightView: createAnnotationButton(payload.id),
 	    animate: true,
 	    draggable:false
 	});

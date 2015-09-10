@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>dk.smartsyddjurs.app</id>
     <name>DigitalSyddjurs</name>
-    <version>0.8.7</version>
+    <version>0.8.8</version>
     <publisher>Appsolution</publisher>
     <url>http://smartsyddjurs.dk/</url>
     <description>Developed for Bellcom by Appsolution</description>
